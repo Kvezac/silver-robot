@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from .models import User
 
-# Create your views here.
 
 def user_list(request):
     context = User.objects.all()

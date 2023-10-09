@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
-def index(request):
-    return render(request, 'company/index.html')
+
+def home(request):
+    context = {}
+    return render(request, 'company/home.html', context)
