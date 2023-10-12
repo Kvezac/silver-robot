@@ -119,7 +119,7 @@ def creat_employee():
     employee.position = Position.objects.order_by("?").first()
     employee.hire_date = creat_date_of_bth(0, 10)
     employee.salary = creat_salary(50000, 100000)
-    employee.parent = Employee.objects.filter().order_by('?').first()
+    employee.parent = Employee.objects.filter(gi).order_by('?').first()
     Employee.objects.create(employee)
     employee.save()
 
