@@ -1,3 +1,9 @@
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+django.setup()
+
 import random
 from datetime import datetime
 
@@ -9,7 +15,9 @@ from company.models import Employee, Position
 from django.contrib.auth.models import User
 
 fake = Faker('ru-Ru')
-fake.seed(4321)
+
+
+# fake.seed(4321)
 
 
 def creat_position(total: int = 10) -> None:
@@ -17,7 +25,7 @@ def creat_position(total: int = 10) -> None:
         vocation = Position()
         vocation.name = fake.unique.job()
         vocation.slug = last_name_translit(vocation.name).lower()
-        Position.objects.create(vocation)
+        vocation.save()
 
 
 def creat_base(gender: str) -> tuple:
@@ -81,7 +89,7 @@ def creat_city() -> str:
 def creat_user(last_name):
     last_name_tr = last_name_translit(last_name)
 
-    user = User.objects.create_user(
+    user = User(
         username=last_name_tr,
         email=creat_email(last_name_tr),
         password='Qwer1234')
@@ -119,10 +127,9 @@ def creat_employee():
     employee.position = Position.objects.order_by("?").first()
     employee.hire_date = creat_date_of_bth(0, 10)
     employee.salary = creat_salary(50000, 100000)
-    employee.parent = Employee.objects.filter(gi).order_by('?').first()
-    Employee.objects.create(employee)
+    employee.parent = Employee.objects.filter().order_by('?').first()
     employee.save()
 
 
 if __name__ == '__main__':
-    print(creat_position(10))
+    creat_employee()
