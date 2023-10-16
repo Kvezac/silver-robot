@@ -1,14 +1,17 @@
 import os
+import string
+
 import django
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-django.setup()
-
 import random
 from datetime import datetime
 
+# from django.core.management import BaseCommand
 from faker import Faker
 from transliterate import translit
+from company.management.decorators.clockdeco import clock
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+django.setup()
 
 from user.models import Profile
 from company.models import Employee, Position
@@ -17,15 +20,14 @@ from django.contrib.auth.models import User
 fake = Faker('ru-Ru')
 
 
-# fake.seed(4321)
-
-
+@clock
 def creat_position(total: int = 10) -> None:
-    for _ in range(total):
-        vocation = Position()
-        vocation.name = fake.unique.job()
-        vocation.slug = last_name_translit(vocation.name).lower()
-        vocation.save()
+    if not Position.objects.exists():
+        for _ in range(total):
+            vocation = Position()
+            vocation.name = fake.unique.job()
+            vocation.slug = last_name_translit(vocation.name).lower()
+            vocation.save()
 
 
 def creat_base(gender: str) -> tuple:
@@ -54,13 +56,6 @@ def creat_gender():
     return random.choice(list_gender)
 
 
-def year_limit(year_lim: int) -> tuple:
-    date_year = datetime.today().year - year_lim
-    date_month = datetime.today().month
-    date_day = datetime.today().day
-    return date_year, date_month, date_day
-
-
 def creat_date_of_bth(min_year: int, max_year: int) -> object:
     current_year_young, current_month_young, current_day_young = year_limit(min_year)
     current_year_old, current_month_old, current_day_old = year_limit(max_year)
@@ -71,11 +66,28 @@ def creat_date_of_bth(min_year: int, max_year: int) -> object:
 
 
 def last_name_translit(last_name: str) -> str:
-    return translit(last_name, 'ru', reversed=True)
+    result = translit(last_name, 'ru', reversed=True).translate(str.maketrans('', '', string.punctuation))
+    return result
 
 
 def creat_email(last_name: str) -> str:
-    return f'{last_name[:5]}_{fake.bothify(text="??####")}@example.com'
+    return f'{last_name}_{fake.bothify(text="??####?")}@example.com'
+
+
+def add_one(func):
+    def inner(*args, **kwargs):
+        inner.total += 1
+        result = f'{func(*args, **kwargs)}{inner.total}'
+        return result
+
+    inner.total = 0
+    return inner
+
+
+@add_one
+def creat_username(last_name: str) -> str:
+    result = f'{last_name}_'
+    return result
 
 
 def creat_phone() -> str:
@@ -88,9 +100,8 @@ def creat_city() -> str:
 
 def creat_user(last_name):
     last_name_tr = last_name_translit(last_name)
-
     user = User(
-        username=last_name_tr,
+        username=creat_username(last_name_tr),
         email=creat_email(last_name_tr),
         password='Qwer1234')
     user.save()
@@ -121,15 +132,15 @@ def creat_salary(min_salary, max_salary) -> str:
     return salary
 
 
-def creat_employee():
+def creat_employee(level, salary_lim: tuple = (10000, 20000)):
     employee = Employee()
     employee.name = create_profile()
     employee.position = Position.objects.order_by("?").first()
     employee.hire_date = creat_date_of_bth(0, 10)
-    employee.salary = creat_salary(50000, 100000)
-    employee.parent = Employee.objects.filter().order_by('?').first()
+    employee.salary = creat_salary(*salary_lim)
+    employee.parent = Employee.objects.filter(level=level - 1).order_by('?').first()
     employee.save()
 
 
-if __name__ == '__main__':
-    creat_employee()
+
+

@@ -17,4 +17,4 @@ class Profile(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f'Profile: {self.last_name} {self.name} {self.middle_name}'
+        return f'{self.__class__.__name__}: {self.last_name}'

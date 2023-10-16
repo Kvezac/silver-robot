@@ -14,7 +14,7 @@ class Employee(MPTTModel):
         order_insertion_by = ['name']
 
     def __str__(self):
-        return self.name
+        return f'{self.__class__.__name__}: {self.name.last_name}'
 
 
 class Position(models.Model):
