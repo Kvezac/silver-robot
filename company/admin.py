@@ -4,24 +4,12 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 from .models import Position, Employee
 
 
-# @admin.register(Position)
-# class PositionAdmin(admin.ModelAdmin):
-#     readonly_fields = ("slug", "date_create")
-#
-#
-# @admin.register(Employee)
-# class EmployeeAdmin(DjangoMpttAdmin):
-#     pass
-
-
+@admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
-    model = Employee
-    extra = 5
+    readonly_fields = ("slug", "date_create")
 
 
+@admin.register(Employee)
 class EmployeeAdmin(DjangoMpttAdmin):
-    list_display = ['name', 'position', 'salary', 'hide_date']
+    list_display = ['name', 'position', 'salary']
 
-
-admin.site.register(Position)
-admin.site.register(Employee)

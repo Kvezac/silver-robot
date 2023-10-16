@@ -19,13 +19,13 @@ class Position(models.Model):
 
 class Employee(MPTTModel):
     name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    position = TreeForeignKey('Position', on_delete=models.PROTECT, null=True, blank=True)
+    position = models.ForeignKey('Position', on_delete=models.PROTECT, null=True, blank=True)
     hire_date = models.DateField()
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['salary']
 
     class Meta:
         ordering = ['level']
