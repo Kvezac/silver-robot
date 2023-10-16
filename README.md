@@ -12,19 +12,19 @@ git clone https://github.com/Kvezac/silver-robot.git
 ```commandline
 pip install -r requirements.txt
 ```
-* Заполнить базу данных командой из терминала.  
-Команда имеет два позиционных аргумента:
-  - Количество профессий 'position' default=100.
-  - Количество сотрудников 'total_employee' default=500.  
-  
-Создать миграции на основе моделей  
+* Создать миграции на основе моделей
 ```commandline
 python manage.py makemiggrations
 ```
-  Выполнить миграции
+* Выполнить миграции
 ```commandline
 python manage.py migrate
 ```
+* Заполнить базу данных командой из терминала.  
+Команда имеет два позиционных аргумента:
+- Количество профессий 'position' default=100.
+- Количество сотрудников 'total_employee' default=500.  
+  
 Пример с аргументами:
 ```commandline
 python manage.py seed 200 50000
