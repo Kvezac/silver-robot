@@ -35,12 +35,12 @@ def creat_base(gender: str) -> tuple:
         last_name = fake.last_name_female()
         first_name = fake.first_name_female()
         middle_name = fake.middle_name_female()
-        gender = 'Женский'
+        gender = 'Female'
     else:
         last_name = fake.last_name_male()
         first_name = fake.first_name_male()
         middle_name = fake.middle_name_male()
-        gender = 'Мужской'
+        gender = 'Male'
     return first_name, middle_name, last_name, gender
 
 
@@ -52,7 +52,7 @@ def year_limit(year_lim: int) -> tuple:
 
 
 def creat_gender():
-    list_gender = ['female', 'male']
+    list_gender = ['Female', 'Male']
     return random.choice(list_gender)
 
 
@@ -140,7 +140,3 @@ def creat_employee(level, salary_lim: tuple = (10000, 20000)):
     employee.salary = creat_salary(*salary_lim)
     employee.parent = Employee.objects.filter(level=level - 1).order_by('?').first()
     employee.save()
-
-
-
-

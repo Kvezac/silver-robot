@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     # lib
     'mptt.apps.MpttConfig',
+    'django_mptt_admin',
 
 ]
 
