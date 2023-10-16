@@ -17,6 +17,14 @@ pip install -r requirements.txt
   - Количество профессий 'position' default=100.
   - Количество сотрудников 'total_employee' default=500.  
   
+Создать миграции на основе моделей  
+```commandline
+python manage.py makemiggrations
+```
+  Выполнить миграции
+```commandline
+python manage.py migrate
+```
 Пример с аргументами:
 ```commandline
 python manage.py seed 200 50000
