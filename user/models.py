@@ -11,11 +11,12 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     middle_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
+    image = models.ImageField(upload_to='profiles/images', blank=True, null=True,
+                              default='profiles/images/user-default.png')
     gender = models.CharField(max_length=7, choices=GENDER_CHOICES, blank=True, null=True)
     date_of_bth = models.DateField(auto_now=False, blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(upload_to='profiles/', blank=True, null=True, default='profiles/user-default.png')
 
     def __str__(self):
         return f'{self.__class__.__name__}: {self.last_name}'
