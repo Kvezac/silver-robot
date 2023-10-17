@@ -11,5 +11,5 @@ class PositionAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(DjangoMpttAdmin):
-    list_display = ['name', 'position', 'salary']
+    list_display = ('name', 'position', 'salary',)
 

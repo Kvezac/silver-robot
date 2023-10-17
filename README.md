@@ -14,7 +14,7 @@ pip install -r requirements.txt
 ```
 * Создать миграции на основе моделей
 ```commandline
-python manage.py makemiggrations
+python manage.py makemigrations
 ```
 * Выполнить миграции
 ```commandline

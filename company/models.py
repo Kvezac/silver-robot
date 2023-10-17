@@ -6,7 +6,6 @@ from user.models import Profile
 class Position(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, blank=True)
-    # employee = TreeForeignKey('Employee', on_delete=models.PROTECT, blank=True)
     date_create = models.DateField(auto_now_add=True)
 
     class Meta:
