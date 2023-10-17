@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'company/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    <section>
+        <!--    <div class="alert alert-light text-center" role="alert">-->
+        <!--        Информационное сообщение-->
+        <!--    </div>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h1 class="text-light mt-5">Добро пожаловать</h1>
+                    <h2 class="text-light">
+                    </h2>
+                    <button id="start-purchase-btn" type="button" class="btn btn-lg">
+                        <a id="start-purchase-link" href="{% url 'user:login' %}">
+                            Войти в систему
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

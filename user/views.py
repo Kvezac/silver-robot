@@ -1,7 +1,13 @@
 from django.shortcuts import render
-from .models import User
 
 
-def user_list(request):
-    context = User.objects.all()
-    return render(request, 'user/user-list.html', context)
+def login(request):
+    title = "Вход в систему"
+    context = {'title': title}
+    return render(request, 'user/login.html', context)
+
+
+def signup(request):
+    title = "Регистрация в систему"
+    context = {'title': title}
+    return render(request, 'user/signup.html', context)
