@@ -8,7 +8,7 @@ body {
 }
 
 #start-purchase-btn {
-    background-color: #23364e;
+    /*background-color: #23364e;*/
     border-color: #23364e;
     color: white;
 }
@@ -17,3 +17,9 @@ body {
     text-decoration: none;
     color: white;
 }
+
+/* user */
+
+ .special-card {
+            background-color: rgba(245, 245, 245, 0.4) !important;
+        }
