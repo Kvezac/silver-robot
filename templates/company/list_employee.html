@@ -2,5 +2,39 @@
 {% load static %}
 
 {% block content %}
-<h1>list employee</h1>
+    {% load mptt_tags %}
+    <h3>Сотрудники</h3>
+    {% load mptt_tags %}
+    <ul>
+        {% recursetree nodes %}
+            <li>
+                <a href="{% url 'company:list-employee' node.id %}">
+                    {{ node.name }}
+                    {{ node.id }}
+                    {{ node.level }}
+                </a>
+                {% if node.is_root_node %}
+                    {% if node.id == root_employee_id %}
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {% if not node.is_leaf_node %}
+                        {% if current_employee.id == node.id %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% elif node.level < current_employee.level %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
 {% endblock %}
