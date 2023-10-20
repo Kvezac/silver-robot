@@ -21,13 +21,18 @@ fake = Faker('ru-Ru')
 
 
 @clock
+def clear_table() -> None:
+    for name_table in (Profile, User, Employee, Position):
+        name_table.objects.all().delete()
+
+
+@clock
 def creat_position(total: int = 10) -> None:
-    if not Position.objects.exists():
-        for _ in range(total):
-            vocation = Position()
-            vocation.name = fake.unique.job()
-            vocation.slug = last_name_translit(vocation.name).lower()
-            vocation.save()
+    for _ in range(total):
+        vocation = Position()
+        vocation.name = fake.unique.job()
+        vocation.slug = last_name_translit(vocation.name).lower()
+        vocation.save()
 
 
 def creat_base(gender: str) -> tuple:
@@ -51,7 +56,7 @@ def year_limit(year_lim: int) -> tuple:
     return date_year, date_month, date_day
 
 
-def creat_gender():
+def creat_gender() -> str:
     list_gender = ['Female', 'Male']
     return random.choice(list_gender)
 
@@ -98,7 +103,7 @@ def creat_city() -> str:
     return fake.city()
 
 
-def creat_user(last_name):
+def creat_user(last_name) -> object:
     last_name_tr = last_name_translit(last_name)
     user = User(
         username=creat_username(last_name_tr),
@@ -122,7 +127,7 @@ def create_profile() -> object:
     return profile
 
 
-def creat_salary(min_salary, max_salary) -> str:
+def creat_salary(min_salary: int, max_salary: int) -> str:
     salary = fake.pydecimal(left_digits=5,
                             right_digits=2,
                             positive=True,
@@ -132,7 +137,7 @@ def creat_salary(min_salary, max_salary) -> str:
     return salary
 
 
-def creat_employee(level, salary_lim: tuple = (10000, 20000)):
+def creat_employee(level: int, salary_lim: tuple = (10000, 20000)):
     employee = Employee()
     employee.name = create_profile()
     employee.position = Position.objects.order_by("?").first()

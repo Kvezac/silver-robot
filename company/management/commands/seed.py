@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 
-from company.management.commands._tools import creat_position, creat_employee
+from company.management.commands._tools import creat_position, creat_employee, clear_table
 from company.management.decorators.clockdeco import clock
 
 
@@ -13,6 +13,7 @@ class Command(BaseCommand):
 
     @clock
     def handle(self, *args, **kwargs):
+        clear_table()
         position = kwargs['position']
         total_employee = kwargs['total_employee']
 
