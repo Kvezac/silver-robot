@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from django.contrib.auth.models import User
 
 
@@ -18,5 +18,5 @@ class Profile(models.Model):
     phone = models.CharField(max_length=15, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.__class__.__name__}: {self.last_name}'

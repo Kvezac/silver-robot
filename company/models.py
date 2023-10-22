@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from mptt.models import MPTTModel, TreeForeignKey
 from user.models import Profile
 
@@ -12,8 +12,13 @@ class Position(models.Model):
         verbose_name = 'Профессия'
         verbose_name_plural = 'Профессии'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
+
+    @classmethod
+    def truncate(cls):
+        with connection.cursor() as cursor:
+            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table}')
 
 
 class Employee(MPTTModel):
@@ -31,5 +36,5 @@ class Employee(MPTTModel):
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.__class__.__name__}: {self.pk} {self.name.last_name}'

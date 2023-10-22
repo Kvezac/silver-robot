@@ -1,3 +1,4 @@
+import decimal
 import os
 import string
 
@@ -104,6 +105,9 @@ def creat_city() -> str:
 
 
 def creat_user(last_name) -> object:
+    """
+        Creates a basic login user with a fixed password
+    """
     last_name_tr = last_name_translit(last_name)
     user = User(
         username=creat_username(last_name_tr),
@@ -114,6 +118,9 @@ def creat_user(last_name) -> object:
 
 
 def create_profile() -> object:
+    """
+        Creates a profile from an application user
+    """
     profile = Profile()
     profile.name, \
         profile.middle_name, \
@@ -127,7 +134,10 @@ def create_profile() -> object:
     return profile
 
 
-def creat_salary(min_salary: int, max_salary: int) -> str:
+def creat_salary(min_salary: int, max_salary: int) -> decimal:
+    """
+        Create fake salary depending on what level the employee is
+    """
     salary = fake.pydecimal(left_digits=5,
                             right_digits=2,
                             positive=True,
@@ -137,7 +147,7 @@ def creat_salary(min_salary: int, max_salary: int) -> str:
     return salary
 
 
-def creat_employee(level: int, salary_lim: tuple = (10000, 20000)):
+def creat_employee(level: int, salary_lim: tuple[int | decimal, int | decimal] = (10000, 20000)):
     employee = Employee()
     employee.name = create_profile()
     employee.position = Position.objects.order_by("?").first()
