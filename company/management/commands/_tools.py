@@ -109,11 +109,10 @@ def creat_user(last_name) -> object:
         Creates a basic login user with a fixed password
     """
     last_name_tr = last_name_translit(last_name)
-    user = User(
+    user = User.objects.create_user(
         username=creat_username(last_name_tr),
         email=creat_email(last_name_tr),
         password='Qwer1234')
-    user.save()
     return user
 
 
@@ -147,7 +146,7 @@ def creat_salary(min_salary: int, max_salary: int) -> decimal:
     return salary
 
 
-def creat_employee(level: int, salary_lim: tuple[int | decimal, int | decimal] = (10000, 20000)):
+def creat_employee(level: int, salary_lim: tuple = (10000, 20000)):
     employee = Employee()
     employee.name = create_profile()
     employee.position = Position.objects.order_by("?").first()

@@ -1,40 +1,20 @@
 {% extends 'base/base.html' %}
-{% load static %}
 
 {% block content %}
     {% load mptt_tags %}
-    <h3>Сотрудники</h3>
-    {% load mptt_tags %}
-    <ul>
-        {% recursetree nodes %}
-            <li>
-                <a href="{% url 'company:list-employee' node.id %}">
+    <div class="container">
+        <h1>Employees</h1>
+        <ul class="list-group">
+            {% recursetree employees %}
+                <li class="list-group-item">
                     {{ node.name }}
-                    {{ node.id }}
-                    {{ node.level }}
-                </a>
-                {% if node.is_root_node %}
-                    {% if node.id == root_employee_id %}
-                        {% if not node.is_leaf_node %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% endif %}
-                    {% endif %}
-                {% else %}
                     {% if not node.is_leaf_node %}
-                        {% if current_employee.id == node.id %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% elif node.level < current_employee.level %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% endif %}
+                        <ul class="list-group children">
+                            {{ children }}
+                        </ul>
                     {% endif %}
-                {% endif %}
-            </li>
-        {% endrecursetree %}
-    </ul>
+                </li>
+            {% endrecursetree %}
+        </ul>
+    </div>
 {% endblock %}

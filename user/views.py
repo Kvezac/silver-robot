@@ -1,11 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import SigUpForm, SignInForm
 
 
-def login(request):
+def login_user(request):
     title = "Вход в систему"
     context = {'title': title}
     if request.method == 'GET':
@@ -18,7 +19,9 @@ def login(request):
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
+            print(User.objects.get(username=username))
             user = authenticate(request, username=username, password=password)
+            print(request)
             if user is not None:
                 login(request, user)
                 return redirect('company:list-employee')
@@ -45,7 +48,7 @@ def signup(request):
 
 
 @login_required
-def logout(request):
+def logout_user(request):
     if request.method == 'POST':
         logout(request)
         messages.success(request, "Вы вышли из системы")
