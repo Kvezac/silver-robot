@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models, connection
 from mptt.models import MPTTModel, TreeForeignKey
 from user.models import Profile
@@ -38,3 +40,11 @@ class Employee(MPTTModel):
 
     def __str__(self) -> str:
         return f'{self.__class__.__name__}: {self.pk} {self.name.last_name}'
+
+    def age(self) -> int:
+        today = date.today()
+        if self.hire_date:
+            return today.year - self.hire_date.year - (
+                        (today.month, today.day) < (self.hire_date.month, self.hire_date.day))
+        else:
+            return 0

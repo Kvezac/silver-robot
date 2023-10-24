@@ -6,6 +6,8 @@ from company.models import Employee
 
 def home(request):
     title = 'main page'
+    date = 'date.now'
+    time = 'time.now'
     context = {'title': title}
     return render(request, 'company/index.html', context)
 

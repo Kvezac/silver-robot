@@ -20,6 +20,174 @@ body {
 
 /* user */
 
- .special-card {
-            background-color: rgba(245, 245, 245, 0.4) !important;
-        }
+.special-card {
+    background-color: rgba(245, 245, 245, 0.4) !important;
+}
+
+.main {
+    width: 80vw;
+    height: auto;
+    margin: auto;
+    background-image: linear-gradient(to bottom, #e53935, #3949ab);
+    color: white;
+    position: relative;
+    top: 5vh;
+    padding: 1vw
+}
+
+body {
+    background-color: black;
+    font-family: 'Roboto', sans-serif
+}
+
+.messi {
+    height: 80vh;
+    position: relative;
+    right: 3vw;
+    display: none
+}
+
+.title {
+    width: 90%;
+    background-color: rgb(255, 255, 255, 0.2);
+    font-size: 3vw;
+    padding: 0vw;
+    color: black;
+    animation-name: first;
+    animation-duration: 1s;
+    animation-fill-mode: forwards
+}
+
+@keyframes first {
+    from {
+        width: 0%;
+        font-size: 0vw;
+        padding: 0vw
+    }
+    to {
+        width: 90%;
+        font-size: 3vw;
+        padding: 0.5vw
+    }
+}
+
+.details {
+    width: 90%;
+    height: 0vh;
+    background-color: rgb(255, 255, 255, 0.2);
+    margin: auto;
+    padding: 0vw;
+    color: black;
+    animation-name: second;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 1s
+}
+
+@keyframes second {
+    from {
+        height: 0vh;
+        padding: 0vw
+    }
+    to {
+        height: 75vh;
+        padding: 1vw
+    }
+}
+
+tr {
+    border: 2px solid rgb(0, 0, 0, 0.0)
+}
+
+.bio {
+    font-size: 1.2vw
+}
+
+.stats {
+    background-color: #e53935;
+    width: 0%;
+    color: gold;
+    height: 3vw;
+    font-size: 0vw;
+    padding: 0vw;
+    animation-name: fourth;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s
+}
+
+@keyframes fourth {
+    from {
+        width: 0%;
+        font-size: 0vw;
+        padding: 0vw
+    }
+    to {
+        width: 100%;
+        font-size: 1.5vw;
+        padding: 0.5vw
+    }
+}
+
+.ss {
+    position: relative;
+    bottom: 80vh;
+    left: 21vw;
+    font-size: 3vw;
+    color: gold
+}
+
+.bigno {
+    position: relative;
+    bottom: 82vh;
+    left: 20vw;
+    font-size: 5vw;
+    color: gold
+}
+
+.flag {
+    height: 1.5vw;
+    width: 2vw;
+    position: relative;
+    bottom: 0.2vw
+}
+
+@media only screen and (max-width: 425px) {
+    .main {
+        width: 100vw;
+        height: 270vw
+    }
+
+    .bio {
+        font-size: 3.6vw
+    }
+
+    .stats {
+        height: 9vw
+    }
+
+    .flag {
+        height: 5.4vw;
+        width: 6vw
+    }
+
+    .messi {
+        height: 80vw;
+        position: relative;
+        left: 18vw
+    }
+
+    .ss {
+        position: relative;
+        bottom: 80vw;
+        left: 70vw;
+        font-size: 5vw
+    }
+
+    .bigno {
+        position: relative;
+        bottom: 84vw;
+        left: 68vw;
+        font-size: 8vw
+    }
+}

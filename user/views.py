@@ -3,7 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from .forms import SigUpForm, SignInForm
+
+from company.models import Employee
+from .forms import SigUpForm, SignInForm, ProfileForm
+from .models import Profile
 
 
 def login_user(request):
@@ -53,3 +56,30 @@ def logout_user(request):
         logout(request)
         messages.success(request, "Вы вышли из системы")
         return redirect('company:home')
+
+
+def user_profile(request):
+    profile = request.user.profile
+    employee = Employee.objects.get(name=profile.id)
+    title = f'Профиль: {profile.name}'
+    context = {
+        'title': title,
+        'profile': profile,
+        'employee': employee,
+    }
+    return render(request, 'user/profile.html', context)
+
+
+def edit_profile(request):
+    profile = request.user.profile
+    title = f'Страница редактирования: {profile.name}'
+    form = ProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('user:profile')
+    context = {'title': title,
+               'form': form,
+               }
+    return render(request, 'user/edit_profile.html', context)

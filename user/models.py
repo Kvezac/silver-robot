@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models, connection
 from django.contrib.auth.models import User
 
@@ -20,3 +22,11 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f'{self.__class__.__name__}: {self.last_name}'
+
+    def age(self) -> int:
+        today = date.today()
+        if self.date_of_bth:
+            return today.year - self.date_of_bth.year - (
+                        (today.month, today.day) < (self.date_of_bth.month, self.date_of_bth.day))
+        else:
+            return 0
