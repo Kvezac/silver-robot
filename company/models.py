@@ -1,6 +1,6 @@
 from datetime import date
 
-from django.db import models, connection
+from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from user.models import Profile
 
@@ -17,11 +17,6 @@ class Position(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    @classmethod
-    def truncate(cls):
-        with connection.cursor() as cursor:
-            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table}')
-
 
 class Employee(MPTTModel):
     name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
@@ -31,7 +26,7 @@ class Employee(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     class MPTTMeta:
-        order_insertion_by = ['salary']
+        order_insertion_by = ['name']
 
     class Meta:
         ordering = ['level']
@@ -45,6 +40,15 @@ class Employee(MPTTModel):
         today = date.today()
         if self.hire_date:
             return today.year - self.hire_date.year - (
-                        (today.month, today.day) < (self.hire_date.month, self.hire_date.day))
+                    (today.month, today.day) < (self.hire_date.month, self.hire_date.day))
         else:
             return 0
+
+    def get_parent(self) -> object:
+        ancestors = self.get_ancestors()
+        parent = ancestors.last()
+        return parent if parent is not None else '-'
+
+    def get_child_count(self) -> int:
+        child_count = self.get_descendant_count()
+        return child_count

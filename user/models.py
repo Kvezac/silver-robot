@@ -21,12 +21,15 @@ class Profile(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self) -> str:
-        return f'{self.__class__.__name__}: {self.last_name}'
+        return f'{self.last_name}'
 
     def age(self) -> int:
         today = date.today()
         if self.date_of_bth:
             return today.year - self.date_of_bth.year - (
-                        (today.month, today.day) < (self.date_of_bth.month, self.date_of_bth.day))
+                    (today.month, today.day) < (self.date_of_bth.month, self.date_of_bth.day))
         else:
             return 0
+
+    def full_name(self) -> str:
+        return f'{self.last_name} {self.name} {self.middle_name}'

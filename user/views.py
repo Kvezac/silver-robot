@@ -73,13 +73,13 @@ def user_profile(request):
 def edit_profile(request):
     profile = request.user.profile
     title = f'Страница редактирования: {profile.name}'
-    form = ProfileForm(instance=profile)
+    forms = ProfileForm(instance=profile)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
+        forms = ProfileForm(request.POST, request.FILES, instance=profile)
+        if forms.is_valid():
+            forms.save()
             return redirect('user:profile')
     context = {'title': title,
-               'form': form,
+               'forms': forms,
                }
     return render(request, 'user/edit_profile.html', context)

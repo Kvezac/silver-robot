@@ -56,7 +56,7 @@ class SignInForm(forms.Form):
         max_length=100,
         required=True,
         widget=forms.TextInput(attrs={
-            'class': "form-control",
+            'class': "form-control mt-2",
             'id': "InputUsername",
             'placeholder': "Введите логин"
         })

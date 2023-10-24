@@ -23,7 +23,7 @@ def clock(func):
             pairs = [f'{k}={w}' if type(k) != "object" else k.__class__ for k, w in sorted(kwargs.items()) if w]
             args_lst.append(", ".join(pairs))
         arg_str = ", ".join(args_lst) if args_lst else f'{OKGREEN}finish{OKGREEN}'
-        print(f'{HEADER}{name}{ENDC} -> time {OKBLUE}{elapsed:.2f}{ENDC} --> {arg_str}')
+        print(f'{HEADER}{name}{ENDC} -> time {OKBLUE}{elapsed:.2f}{ENDC}sec --> {arg_str}')
         return result
 
     return clocked
