@@ -22,7 +22,7 @@ python manage.py migrate
 ```
 * Заполнить базу данных командой из терминала.  
 Команда имеет два позиционных аргумента:
-- Количество профессий 'position' default=100.
+- Количество профессий 'position' default=20.
 - Количество сотрудников 'total_employee' default=500.  
   
 Пример с аргументами:
@@ -33,7 +33,10 @@ python manage.py seed 200 50000
 ```commandline
 python manage.py seed
 ```
-
+Запуск проекта:
+```commandline
+python manage.py runserver
+```
 
 ## План проекта:
 

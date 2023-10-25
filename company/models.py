@@ -34,7 +34,7 @@ class Employee(MPTTModel):
         verbose_name_plural = 'Сотрудники'
 
     def __str__(self) -> str:
-        return f'{self.__class__.__name__}: {self.pk} {self.name.last_name}'
+        return f'{self.name.last_name}'
 
     def age(self) -> int:
         today = date.today()

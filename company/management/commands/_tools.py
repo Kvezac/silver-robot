@@ -6,7 +6,6 @@ import django
 import random
 from datetime import datetime
 
-# from django.core.management import BaseCommand
 from faker import Faker
 from transliterate import translit
 from company.management.decorators.clockdeco import clock
@@ -116,19 +115,33 @@ def creat_user(last_name) -> object:
     return user
 
 
-def create_profile() -> object:
-    """
-        Creates a profile from an application user
-    """
-    profile = Profile()
-    profile.name, \
-        profile.middle_name, \
-        profile.last_name, \
-        profile.gender = creat_base(creat_gender())
+# def create_profile() -> object:
+#     """
+#         Creates a profile from an application user
+#     """
+#     profile = Profile()
+#     profile.name, \
+#         profile.middle_name, \
+#         profile.last_name, \
+#         profile.gender = creat_base(creat_gender())
+#     profile.date_of_bth = creat_date_of_bth(18, 65)
+#     profile.phone = creat_phone()
+#     profile.city = creat_city()
+#     profile.user = creat_user(profile.last_name)
+#     profile.save()
+#     return profile
+
+def update_profile() -> object:
+    name, middle_name, last_name, gender = creat_base(creat_gender())
+    user = creat_user(last_name)
+    profile = Profile.objects.get(user_id=user.id)
+    profile.name = name
+    profile.middle_name = middle_name
+    profile.last_name = last_name
+    profile.gender = gender
     profile.date_of_bth = creat_date_of_bth(18, 65)
     profile.phone = creat_phone()
     profile.city = creat_city()
-    profile.user = creat_user(profile.last_name)
     profile.save()
     return profile
 
@@ -148,7 +161,7 @@ def creat_salary(min_salary: int, max_salary: int) -> decimal:
 
 def creat_employee(level: int, salary_lim: tuple = (10000, 20000)):
     employee = Employee()
-    employee.name = create_profile()
+    employee.name = update_profile()
     employee.position = Position.objects.order_by("?").first()
     employee.hire_date = creat_date_of_bth(0, 10)
     employee.salary = creat_salary(*salary_lim)

@@ -22,9 +22,7 @@ def login_user(request):
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-            print(User.objects.get(username=username))
             user = authenticate(request, username=username, password=password)
-            print(request)
             if user is not None:
                 login(request, user)
                 return redirect('company:list-employee')
@@ -45,7 +43,7 @@ def signup(request):
             user_form = form.save()
             if user_form is not None:
                 login(request, user_form)
-                return redirect('company:list-employee')
+                return redirect('user:edit-profile')
         context['form'] = form
         return render(request, 'user/signup.html', context)
 
