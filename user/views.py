@@ -80,4 +80,4 @@ def edit_profile(request):
     context = {'title': title,
                'forms': forms,
                }
-    return render(request, 'user/edit_profile.html', context)
+    return render(request, 'user/edit-profile.html', context)
