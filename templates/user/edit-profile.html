@@ -28,22 +28,27 @@
                             <label for="validationCustom01" class="form-label">Отчество</label>
                             <input type="text" class="form-control" id="validationCustom01"
                                    value="{{ forms.middle_name.value }}" required>
-                            <div class="col-md-6">
-                                <label for="male2" class="form-label">Пол</label><br>
-                                <input type="radio" id="male2" name="gender" value="male">
-                                <label for="male2">Мужской</label><br>
-
-                                <input type="radio" id="female2" name="gender" value="female">
-                                <label for="female2">Женский</label>
-
-                            </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="validationCustom01" class="form-label">Дата рождения</label>
-                            <input type="text" class="form-control" id="validationCustom01"
-                                   value="{{ forms.date_of_bth.value }}" required>
+                            <label for="male2" class="form-label">Пол</label>
+                            {{ forms.gender }}
+                            </label>
                         </div>
-
+                        <div class="col-md-3">
+                            <label for="inputDate" class="form-label">Дата рождения</label>
+                            <input type="date" class="form-control" id="validationCustom01"
+                                   value="{{ forms.date_of_bth.value|date:'Y-m-d' }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="inputDate" class="form-label">Телефон</label>
+                            <input type="tel" class="form-control" id="validationCustom01"
+                                   value="{{ forms.phone.value }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="inputDate" class="form-label">Место проживания</label>
+                            <input type="tel" class="form-control" id="validationCustom01"
+                                   value="{{ forms.city.value }}">
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Применить изменения</button>
                         </div>
