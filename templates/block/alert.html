@@ -1,0 +1,14 @@
+{% load static %}
+
+<div id="top-alert" class="alert alert-warning alert-dismissible fade show">
+    {% for message in messages %}
+        <div class="text-center">
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+<script src="{% static 'user/js/base.js' %}"></script>
+

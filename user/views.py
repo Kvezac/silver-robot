@@ -76,8 +76,10 @@ def edit_profile(request):
         forms = ProfileForm(request.POST, request.FILES, instance=profile)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'Профиль обновлен')
             return redirect('user:profile')
     context = {'title': title,
                'forms': forms,
                }
+    messages.error(request, 'Что то пошло не так')
     return render(request, 'user/edit-profile.html', context)
