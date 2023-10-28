@@ -70,7 +70,7 @@ def user_profile(request):
 
 def edit_profile(request):
     profile = request.user.profile
-    title = f'Страница редактирования: {profile.name}'
+    title = f'Страница редактирования: {profile.last_name}'
     forms = ProfileForm(instance=profile)
     if request.method == 'POST':
         forms = ProfileForm(request.POST, request.FILES, instance=profile)

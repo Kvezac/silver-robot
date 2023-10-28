@@ -32,7 +32,6 @@
                         <div class="col-md-3">
                             <label for="male2" class="form-label">Пол</label>
                             {{ forms.gender }}
-                            </label>
                         </div>
                         <div class="col-md-3">
                             <label for="inputDate" class="form-label">Дата рождения</label>
@@ -57,48 +56,4 @@
             </div>
         </div>
     </div>
-
-    {#  <div class="container">#}
-    {#    <div class="row">#}
-    {#      <div class="col-md-6 mx-auto">#}
-    {#        <h2>Edit Profile</h2>#}
-    {#        <form method="post" enctype="multipart/form-data">#}
-    {#          {% csrf_token %}#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.name.id_for_label }}">Name</label>#}
-    {#            {{ forms.name }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.middle_name.id_for_label }}">Middle Name</label>#}
-    {#            {{ forms.middle_name }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.last_name.id_for_label }}">Last Name</label>#}
-    {#            {{ forms.last_name }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.image.id_for_label }}">Image</label>#}
-    {#            {{ forms.image }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.gender.id_for_label }}">Gender</label>#}
-    {#            {{ forms.gender }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.date_of_bth.id_for_label }}">Date of Birth</label>#}
-    {#            {{ forms.date_of_bth. }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.phone.id_for_label }}">Phone</label>#}
-    {#            {{ forms.phone }}#}
-    {#          </div>#}
-    {#          <div class="form-group">#}
-    {#            <label for="{{ forms.city.id_for_label }}">City</label>#}
-    {#            {{ forms.city }}#}
-    {#          </div>#}
-    {#          <button type="submit" class="btn btn-primary">Save</button>#}
-    {#        </form>#}
-    {#      </div>#}
-    {#    </div>#}
-    {#  </div>#}
 {% endblock %}
