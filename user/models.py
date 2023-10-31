@@ -10,15 +10,15 @@ class Profile(models.Model):
         ('Female', 'Женский'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    middle_name = models.CharField(max_length=255, blank=True, null=True)
-    last_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name='Фамилия')
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name='Имя')
+    middle_name = models.CharField(max_length=255, blank=True, null=True, verbose_name='Отчество')
     image = models.ImageField(upload_to='profiles/images', blank=True, null=True,
                               default='profiles/images/user-default.png')
-    gender = models.CharField(max_length=7, choices=GENDER_CHOICES, blank=True, null=True)
-    date_of_bth = models.DateField(auto_now=False, blank=True, null=True)
-    phone = models.CharField(max_length=15, blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
+    gender = models.CharField(max_length=7, choices=GENDER_CHOICES, blank=True, null=True, verbose_name='Пол')
+    date_of_bth = models.DateField(auto_now=False, blank=True, null=True, verbose_name='Дата Рождения')
+    phone = models.CharField(max_length=15, blank=True, null=True, verbose_name='Номер Телефона')
+    city = models.CharField(max_length=255, blank=True, null=True, verbose_name='Место Проживания')
 
     def __str__(self) -> str:
         return f'{self.last_name}'

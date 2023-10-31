@@ -71,15 +71,15 @@ def user_profile(request):
 def edit_profile(request):
     profile = request.user.profile
     title = f'Страница редактирования: {profile.last_name}'
-    forms = ProfileForm(instance=profile)
+    form = ProfileForm(instance=profile)
     if request.method == 'POST':
-        forms = ProfileForm(request.POST, request.FILES, instance=profile)
-        if forms.is_valid():
-            forms.save()
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
             messages.success(request, 'Профиль обновлен')
             return redirect('user:profile')
     context = {'title': title,
-               'forms': forms,
+               'form': form,
                }
     messages.error(request, 'Что то пошло не так')
     return render(request, 'user/edit-profile.html', context)
