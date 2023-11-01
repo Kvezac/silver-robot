@@ -15,6 +15,12 @@ class Command(BaseCommand):
 
     @clock
     def handle(self, *args, **kwargs):
+        """
+        Runs commands:
+         clear_table() clearing tables, does not reset the id counter
+         creat_position() creates random positions with a given default quantity 20
+         creat_employee() creates employees by levels with a given number
+        """
         clear_table()
         position = kwargs['position']
         total_employee = kwargs['total_employee']
