@@ -8,7 +8,7 @@
                 <div class="card  shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body">
 {#                        <div class="d-flex align-items-start">#}
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                             {% if profile.image %}
                                 <img src="{{ profile.image.url }}" class="rounded-circle avatar-lg img-thumbnail"
                                      alt="profile-image">
@@ -19,10 +19,10 @@
                                     src="https://bootdey.com/img/Content/avatar/avatar8.png"
                                 {% endif %}
                                     class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
-                                <div class="w-100 ms-3">
-                                    <h4 class="my-0">{{ profile.user.username }}</h4>
-                                    <p class="text-muted">@{{ employee.position|lower }}</p>
-                                </div>
+{#                                <div class="w-100 ms-3">#}
+{#                                    <h4 class="my-0">{{ profile.user.username }}</h4>#}
+{#                                    <p class="text-muted">@{{ employee.position|lower }}</p>#}
+{#                                </div>#}
                             {% endif %}
                         </div>
 

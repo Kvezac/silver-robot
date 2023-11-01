@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+from config import settings
 from user.models import Profile
 
 
@@ -71,6 +72,14 @@ class SignInForm(forms.Form):
     )
 
 
+class DateInput(forms.DateInput):
+    input_type = "date"
+
+    def __init__(self, **kwargs):
+        kwargs["format"] = "%Y-%m-%d"
+        super().__init__(**kwargs)
+
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -80,4 +89,7 @@ class ProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'input form-control'})
+            if field == 'date_of_bth':
+                self.fields[field].widget = DateInput()
+
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
