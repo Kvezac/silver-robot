@@ -38,3 +38,7 @@ def list_employee_id(request, id):
 
 def change_boss(request):
     return None
+
+
+def edit_employee(request):
+    pass
