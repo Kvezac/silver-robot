@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from config import settings
 from user.models import Profile
 
 
@@ -73,6 +72,9 @@ class SignInForm(forms.Form):
 
 
 class DateInput(forms.DateInput):
+    """
+        Convert local date and time for editing
+    """
     input_type = "date"
 
     def __init__(self, **kwargs):
