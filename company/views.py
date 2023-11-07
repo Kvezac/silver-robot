@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 from company.models import Employee
 
@@ -40,5 +40,23 @@ def change_boss(request):
     return None
 
 
-def edit_employee(request):
+class EditEmployeeForm:
     pass
+
+
+def edit_employee(request):
+    employee = get_object_or_404(Employee, id=id)
+
+    if request.method == 'POST':
+        form = EditEmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('user: profile', id=id)
+    else:
+        form = EditEmployeeForm(instance=employee)
+
+    context = {
+        'employee': employee,
+        'form': form,
+    }
+    return render(request, 'company/edit_employee.html', context)

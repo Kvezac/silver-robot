@@ -20,79 +20,44 @@
                             </div>
                         </div>
                         <div class="col-md-10 d-flex flex-column">
-    <div class="row">
-        <div class="col-md-4">
-            <label for="" class="form-label">Фамилия</label>
-            <p type="text" id="validationCustom02">{{ form.last_name }}</p>
-        </div>
-        <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">{{ form.name.label }}</label>
-            <p type="text" id="validationCustom01">{{ form.name }}</p>
-        </div>
-        <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">{{ form.middle_name.label }}</label>
-            <p type="text" id="validationCustom01">{{ form.middle_name }}</p>
-        </div>
-        <div class="col-md-4">
-            <label for="male2" class="form-label">{{ form.gender.label }}</label>
-            {{ form.gender }}
-        </div>
-        <div class="col-md-4">
-            <label for="inputDate" class="form-label">{{ form.date_of_bth.label }}</label>
-            <p>{{ form.date_of_bth|cut:'"' }}</p>
-        </div>
-        <div class="col-md-4">
-            <label for="inputDate" class="form-label">{{ form.phone.label }}</label>
-            {{ form.phone }}
-        </div>
-        <div class="col-md-4">
-            <label for="inputDate" class="form-label">{{ form.city.label }}</label>
-            <p type="text">{{ form.city }}</p>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-12 d-flex justify-content-end">
-            <button class="btn btn-primary" type="submit">Сохранить изменения</button>
-        </div>
-    </div>
-</div>
-{#                        <div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="" class="form-label">Фамилия</label>#}
-{#                                <p type="text" id="validationCustom02">#}
-{#                                    {{ form.last_name }}</p>#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="validationCustom01" class="form-label">{{ form.name.label }}</label>#}
-{#                                <p type="text" id="validationCustom01">#}
-{#                                    {{ form.name }}#}
-{#                                </p>#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="validationCustom01" class="form-label">{{ form.middle_name.label }}</label>#}
-{#                                <p type="text" id="validationCustom01">{{ form.middle_name }}</p>#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="male2" class="form-label">{{ form.gender.label }}</label>#}
-{#                                {{ form.gender }}#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="inputDate" class="form-label">{{ form.date_of_bth.label }}</label>#}
-{#                                <p>{{ form.date_of_bth }}</p>#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="inputDate" class="form-label">{{ form.phone.label }}</label>#}
-{#                                {{ form.phone }}#}
-{#                            </div>#}
-{#                            <div class="col-md-3">#}
-{#                                <label for="inputDate" class="form-label">{{ form.city.label }}</label>#}
-{#                                <p type="text">#}
-{#                                    {{ form.city }}</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="col-3 align-right">#}
-{#                            <button class="btn btn-primary" type="submit">Применить изменения</button>#}
-{#                        </div>#}
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label">{{ form.last_name.label }}</label>
+                                    <p type="text" id="validationCustom02">{{ form.last_name }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationCustom01" class="form-label">{{ form.name.label }}</label>
+                                    <p type="text" id="validationCustom01">{{ form.name }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationCustom01"
+                                           class="form-label">{{ form.middle_name.label }}</label>
+                                    <p type="text" id="validationCustom01">{{ form.middle_name }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="male2" class="form-label">{{ form.gender.label }}</label>
+                                    {{ form.gender }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputDate" class="form-label">{{ form.date_of_bth.label }}</label>
+                                    <p>{{ form.date_of_bth|cut:'"' }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputDate" class="form-label">{{ form.phone.label }}</label>
+                                    <p type="phone">{{ form.phone }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputDate" class="form-label">{{ form.city.label }}</label>
+                                    <p type="text">{{ form.city }}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
