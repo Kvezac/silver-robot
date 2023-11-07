@@ -4,7 +4,7 @@ from company.models import Employee
 from user.forms import DateInput
 
 
-class EmployeeForm(forms.ModelForm):
+class EmployeeForms(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ['name', 'position', 'hire_date', 'salary']

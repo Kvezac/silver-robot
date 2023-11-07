@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
+from company.forms import EmployeeForms
 from company.models import Employee
 
 
@@ -45,18 +46,16 @@ class EditEmployeeForm:
 
 
 def edit_employee(request):
-    employee = get_object_or_404(Employee, id=id)
-
     if request.method == 'POST':
-        form = EditEmployeeForm(request.POST, instance=employee)
+        form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
         if form.is_valid():
-            form.save()
-            return redirect('user: profile', id=id)
+            employee = form.save(commit=False)
+            if employee.get_parent == request.user.profile.employee_set.all().first():
+                employee.save()
+                return redirect('user:profile')
+            else:
+                return redirect('user:profile')
     else:
-        form = EditEmployeeForm(instance=employee)
+        form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
+    return render(request, 'company/edit_employee.html', {'form': form})
 
-    context = {
-        'employee': employee,
-        'form': form,
-    }
-    return render(request, 'company/edit_employee.html', context)
