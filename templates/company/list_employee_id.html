@@ -1,25 +1,22 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load mptt_tags %}
 
 {% block content %}
-    {% load mptt_tags %}
-    <h3>Сотрудники</h3>
-    {% load mptt_tags %}
+    <h3>Сотрудники уровня: {{ root_employee_id }}</h3>
     <ul>
         {% recursetree nodes %}
             <li>
-                <a href="{% url 'company:list-employee' node.id %}">
-                    {{ node.name }}
-                    {{ node.id }}
-                    {{ node.level }}
+                <a class="btn btn__light" href="{% url 'company:list-employee-id' node.id %}">
+                    {{ node.name.full_name }}
+                    {{ node.position }}
+                    {{ node.salary }}
                 </a>
                 {% if node.is_root_node %}
-                    {% if node.id == root_employee_id %}
                         {% if not node.is_leaf_node %}
                             <ul class="children">
                                 {{ children }}
                             </ul>
-                        {% endif %}
                     {% endif %}
                 {% else %}
                     {% if not node.is_leaf_node %}

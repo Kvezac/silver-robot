@@ -26,8 +26,10 @@ def list_employee(request):
 def list_employee_id(request, id):
     current_employee = Employee.objects.get(id=id)
     title = f'Лист сотрудников{current_employee.name.name}'
-    root_employee_id = current_employee.get_root().id
+    root_employee_id = current_employee.get_level()
+    print(root_employee_id)
     nodes = Employee.objects.all()
+    nodes = current_employee.get_descendant().filter(level__gte=root_employee_id)
     context = {
         'title': title,
         'nodes': nodes,
@@ -39,10 +41,6 @@ def list_employee_id(request, id):
 
 def change_boss(request):
     return None
-
-
-class EditEmployeeForm:
-    pass
 
 
 def edit_employee(request):

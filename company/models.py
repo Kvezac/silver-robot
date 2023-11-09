@@ -52,3 +52,7 @@ class Employee(MPTTModel):
     def get_child_count(self) -> int:
         child_count = self.get_descendant_count()
         return child_count
+
+    def get_descendant(self):
+        descendant = self.get_descendants(include_self=True)
+        return descendant
