@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+{#    <a href="#" class="navbar-brand">#}
+{#        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30" height="30"#}
+{#             alt="logo">#}
+{#    </a>#}
+{#    <a href="#" class="navbar-brand">#}
+{#        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Nuxt_square_white.svg" width="30" height="30"#}
+{#             alt="logo">#}
+{#    </a>#}
+{#    <button class="navbar-toggler" type="button" data-toggle="collapse"#}
+{#            data-target="#navbarSupportedContent"#}
+{#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#    </button>#}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="{% url 'company:list-employee' %}" class="nav-link">Все сотрудники</a>
+            </li>
+            <li class="nav-item ">
+                {#                <a href="{% url 'company:list-employee-id' node.id %}" class="nav-link">Просмотреть узел</a>#}
+            </li>
+        </ul>
+        {#        <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0">#}
+        {#            <input name="q", type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">#}
+        {#            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
+        {#        </form>#}
+        {% if user.is_authenticated %}
+            <span class="navbar-text mr-2">{{ user }}</span>
+            <a href="{% url 'user:profile' %}" class="btn btn-outline-light">Профиль</a>
+            <form action="{% url 'user:logout' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-light">Выйти</button>
+            </form>
+            {#            <a href="{% url 'user:logout' %}" class="btn btn-outline-light" method="post">Выход</a>#}
+            {#        {% else %}#}
+            {#            <a href="{% url 'user:login' %}" class="btn btn-outline-light mr-2">Вход</a>#}
+            {#            <a href="{% url 'user:signup' %}" class="btn btn-outline-light mr-2">Регистрация</a>#}
+        {% endif %}
+    </div>
+</nav>

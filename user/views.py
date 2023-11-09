@@ -1,12 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from company.models import Employee
 from .forms import SigUpForm, SignInForm, ProfileForm
-from .models import Profile
 
 
 def login_user(request):
@@ -52,8 +50,9 @@ def signup(request):
 def logout_user(request):
     if request.method == 'POST':
         logout(request)
-        messages.success(request, "Вы вышли из системы")
         return redirect('company:home')
+    else:
+        return redirect('user:login')
 
 
 def user_profile(request):

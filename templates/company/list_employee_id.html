@@ -3,11 +3,11 @@
 {% load mptt_tags %}
 
 {% block content %}
-    <h3>Сотрудники уровня: {{ root_employee_id }}</h3>
+    <h3>Сотрудники уровня: {{ root_employee_id|add:"1" }}</h3>
     <ul>
         {% recursetree nodes %}
-            <li>
-                <a class="btn btn__light" href="{% url 'company:list-employee-id' node.id %}">
+            <li class="table table-success table-striped">
+                <a class="btn btn__dark" href="{% url 'company:list-employee-id' node.id %}">
                     {{ node.name.full_name }}
                     {{ node.position }}
                     {{ node.salary }}
