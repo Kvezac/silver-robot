@@ -144,7 +144,7 @@ def creat_user(last_name) -> object:
     user = User.objects.create_user(
         username=creat_username(last_name_tr),
         email=creat_email(last_name_tr),
-        password='Qwer1234')
+        password='1111')  # Qwer1234')
     return user
 
 
