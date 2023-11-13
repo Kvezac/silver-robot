@@ -1,28 +1,11 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
     {% load mptt_tags %}
-    {#    <div class="container">#}
-    {#        <h1>Сотрудники</h1>#}
-    {#        <ul class="list-group">#}
-    {#            {% recursetree employees %}#}
-    {#                <li class="list-group-item">#}
-    {#                    {{ node.name.full_name }}#}
-    {#                    {% if is_authenticated %}#}
-    {#                        <a class="btn btn__dark" href="{% url 'user:profile' %}">Подробнее</a>#}
-    {#                    {% endif %}#}
-    {##}
-    {#                    <a class="btn btn__dark" href="{% url 'company:list-employee-id' node.id %}">Открыть</a>#}
-    {##}
-    {#                    {% if not node.is_leaf_node %}#}
-    {#                        <ul class="list-group children">#}
-    {#                            {{ children }}#}
-    {#                        </ul>#}
-    {#                    {% endif %}#}
-    {#                </li>#}
-    {#            {% endrecursetree %}#}
-    {#        </ul>#}
-    {#    </div>#}
+    {% block css %}
+        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+    {% endblock %}
     <div>
         <div>
             <ul>

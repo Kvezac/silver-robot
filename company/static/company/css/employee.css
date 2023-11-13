@@ -1,0 +1,8 @@
+ul ul {
+    display: none;
+}
+
+/* Show nested lists when parent is hovered */
+ul li:hover > ul {
+    display: block;
+}
