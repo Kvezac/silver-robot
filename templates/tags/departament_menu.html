@@ -1,0 +1,6 @@
+{% for level in levels %}
+    <li class="w-100">
+        <a href="{% url 'company:list-employee-id' level %}" class="nav-link px-0"> <span
+                class="d-none d-sm-inline">Депортамент уровень {{ level|add:'1' }}</span></a>
+    </li>
+{% endfor %}

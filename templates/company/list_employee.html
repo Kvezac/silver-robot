@@ -1,25 +1,27 @@
 {% extends 'base/base.html' %}
 {% load static %}
-
+{% block navbar %}
+{% include 'block/navbar.html' %}
+{% endblock %}
 {% block content %}
     {% load mptt_tags %}
     {% block css %}
         <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
     {% endblock %}
-    <div>
-        <div>
-            <ul>
-                {% recursetree employees %}
-                    <li>
-                        <a href="{{ node.id }}">{{ node.name }}</a>
-                        {% if not node.is_leaf_node %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% endif %}
-                    </li>
-                {% endrecursetree %}
-            </ul>
-        </div>
-    </div>
+{#    <div>#}
+{#        <div>#}
+{#            <ul>#}
+{#                {% recursetree employees %}#}
+{#                    <li>#}
+{#                        <a href="{{ node.id }}">{{ node.name }}</a>#}
+{#                        {% if not node.is_leaf_node %}#}
+{#                            <ul class="children">#}
+{#                                {{ children }}#}
+{#                            </ul>#}
+{#                        {% endif %}#}
+{#                    </li>#}
+{#                {% endrecursetree %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}

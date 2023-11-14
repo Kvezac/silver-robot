@@ -7,8 +7,6 @@ from company.models import Employee
 
 def home(request):
     title = 'main page'
-    date = 'date.now'
-    time = 'time.now'
     context = {'title': title}
     return render(request, 'company/index.html', context)
 
@@ -23,18 +21,18 @@ def list_employee(request):
     return render(request, 'company/list_employee.html', context=context)
 
 
-def list_employee_id(request, id):
-    current_employee = Employee.objects.get(id=id)
-    title = f'Лист сотрудников{current_employee.name.name}'
-    root_employee_id = current_employee.get_level()
-    print(root_employee_id)
-    nodes = Employee.objects.all()
-    nodes = current_employee.get_descendant().filter(level__gte=root_employee_id)
+def list_employee_id(request, level):
+    nodes = Employee.objects.filter(level=level)
+    title = f'Лист сотрудников департамента уровня {level}'
+    # root_employee_id = current_employee.get_level()
+    # print(root_employee_id)
+    # nodes = Employee.objects.all()
+    # nodes = current_employee.get_descendant() #.filter(level__gte=root_employee_id)
     context = {
         'title': title,
         'nodes': nodes,
-        'current_employee': current_employee,
-        'root_employee_id': root_employee_id
+        # 'current_employee': current_employee,
+        # 'root_employee_id': root_employee_id
     }
     return render(request, 'company/list_employee_id.html', context)
 

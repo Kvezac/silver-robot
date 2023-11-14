@@ -1,63 +1,25 @@
-{#<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">#}
-{#    <a href="#" class="navbar-brand">#}
-{#        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30" height="30"#}
-{#             alt="logo">#}
-{#    </a>#}
-{#    <a href="#" class="navbar-brand">#}
-{#        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Nuxt_square_white.svg" width="30" height="30"#}
-{#             alt="logo">#}
-{#    </a>#}
-{#    <button class="navbar-toggler" type="button" data-toggle="collapse"#}
-{#            data-target="#navbarSupportedContent"#}
-{#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
-{#        <span class="navbar-toggler-icon"></span>#}
-{#    </button>#}
-{#    <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
-{#        <ul class="navbar-nav mr-auto">#}
-{#            <li class="nav-item active">#}
-{#                <a href="{% url 'company:list-employee' %}" class="nav-link">Все сотрудники</a>#}
-{#            </li>#}
-{#            <li class="nav-item ">#}
-{#                <a href="{% url 'company:list-employee-id' node.id %}" class="nav-link">Просмотреть узел</a>#}
-{#            </li>#}
-{#        </ul>#}
-{#        <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0">#}
-{#            <input name="q", type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">#}
-{#            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
-{#        </form>#}
-{#        {% if user.is_authenticated %}#}
-{#            <span class="navbar-text mr-2">{{ user }}</span>#}
-{#            <a href="{% url 'user:profile' %}" class="btn btn-outline-light">Профиль</a>#}
-{#            <form action="{% url 'user:logout' %}" method="post">#}
-{#                {% csrf_token %}#}
-{#                <button class="btn btn-outline-light">Выйти</button>#}
-{#            </form>#}
-{#            <a href="{% url 'user:logout' %}" class="btn btn-outline-light" method="post">Выход</a>#}
-{#        {% else %}#}
-{#            <a href="{% url 'user:login' %}" class="btn btn-outline-light mr-2">Вход</a>#}
-{#            <a href="{% url 'user:signup' %}" class="btn btn-outline-light mr-2">Регистрация</a>#}
-{#        {% endif %}#}
-{#    </div>#}
-{#</nav>#}
-  <style>
-        .nav-link {
-            color: greenyellow;
-        }
+<style>
+    .nav-link {
+        color: #469f15;
+    }
 
-        .nav-link:hover {
-            color: darkolivegreen;
-        }
+    .nav-link:hover {
+        color: darkolivegreen;
+    }
 
-    </style>
+</style>
+{% load static %}
+{% load department_menu %}
+
 
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <!-- Заголовок меню -->
-                <a href="/"
+                <a href="{% url 'company:home' %}"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">СервисБлог</span>
+                    <span class="fs-5 d-none d-sm-inline">СервисПроект</span>
                 </a>
                 <!-- элементы меню -->
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -71,48 +33,15 @@
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-speedometer2"></i> <span
-                                class="ms-1 d-none d-sm-inline">Дашборд</span> </a>
+                                class="ms-1 d-none d-sm-inline">Подразделения</span> </a>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Отчет 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Отчет 2</span>
-                                </a>
-                            </li>
+                            {% departament_menu %}
+
                         </ul>
                     </li>
-
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Заказы</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Продукты</span>
-                        </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Продукт 1</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Продукт 2</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Продукт 3</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Продукт 4</span></a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Покупатели</span>
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Сотрудники</span>
                         </a>
                     </li>
 
@@ -122,18 +51,17 @@
                 <div class="dropdown pb-4 mt-auto">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+                        <img src="{{ profile.image.url }}" alt="employee" width="30" height="30"
                              class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">Иван</span>
+                        <span class="d-none d-sm-inline mx-1">{{ profile.name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#">Новый проект</a></li>
-                        <li><a class="dropdown-item" href="#">Настройки</a></li>
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user:edit-profile' %}">Настройки</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user:profile' %}">Профиль</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Выйти</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user:logout' %}">Выйти</a></li>
                     </ul>
                 </div>
             </div>
