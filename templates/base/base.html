@@ -23,7 +23,7 @@
 </head>
 <body>
 {% block navbar %}
-  {% include 'block/navbar.html' %}
+{#  {% include 'block/navbar.html' %}#}
 {% endblock %}
 {#{% include 'block/alert.html' %}#}
 {% block content %}
@@ -36,6 +36,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+{% block script %}
+
+{% endblock %}
 
 </body>
 </html>

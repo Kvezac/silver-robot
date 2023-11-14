@@ -192,11 +192,16 @@ tr {
     }
 }
 
-ul ul {
-    display: none;
+#clock {
+    font-size: 2em;
+    color: white;
+    /*text-align: center;*/
+    /*margin-top: 1em;*/
 }
 
-/* Show nested lists when parent is hovered */
-ul li:hover > ul {
-    display: block;
+#date {
+  font-size: 1.5em;
+  color: white;
+  /*text-align: center;*/
+  /*margin-top: 0.5em;*/
 }
