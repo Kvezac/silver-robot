@@ -21,6 +21,18 @@
     {% block css %} {% endblock %}
 
 </head>
+{#{% if form.errors %}#}
+{#    <div class="alert alert-danger">#}
+{#        <ul>#}
+{#            {% for field in form %}#}
+{#                {% for error in field.errors %}#}
+{#                    <li>{{ fields.field }}{{ error }}</li>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#{% endif %}#}
+{% include 'block/alert.html' %}
 <body>
 {% block navbar %}
 {#  {% include 'block/navbar.html' %}#}

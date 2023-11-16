@@ -57,19 +57,24 @@ def logout_user(request):
 
 def user_profile(request):
     profile = request.user.profile
-    employee = Employee.objects.get(name=profile.id)
-    title = f'Профиль: {profile.name}'
+    title = f'Профиль: {profile.short_name()}'
     context = {
         'title': title,
         'profile': profile,
-        'employee': employee,
     }
-    return render(request, 'user/profile.html', context)
+    try:
+        employee = Employee.objects.get(name=profile.id)
+    except Employee.DoesNotExist:
+        return render(request, 'user/profile.html', context)
+
+    else:
+        context['employee'] = employee,
+        return render(request, 'user/profile.html', context)
 
 
 def edit_profile(request):
     profile = request.user.profile
-    title = f'Страница редактирования: {profile.last_name}'
+    title = f'Страница редактирования: {profile.short_name()}'
     form = ProfileForm(instance=profile)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)

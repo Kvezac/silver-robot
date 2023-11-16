@@ -37,10 +37,6 @@ def list_employee_id(request, level):
     return render(request, 'company/list_employee_id.html', context)
 
 
-def change_boss(request):
-    return None
-
-
 def edit_employee(request):
     if request.method == 'POST':
         form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
@@ -57,4 +53,8 @@ def edit_employee(request):
 
 
 def search_results(request):
+    return None
+
+
+def change_boss(request):
     return None

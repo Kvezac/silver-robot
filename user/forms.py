@@ -95,3 +95,10 @@ class ProfileForm(forms.ModelForm):
                 self.fields[field].widget = DateInput()
 
             self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+    def clean(self):
+        cleaned_data = super().clean()
+        for field in self.fields:
+            if not cleaned_data.get(field):
+                print(self.fields[field].label)
+                self.add_error(field,  f"Поле {self.fields[field].label} не должно быть пустым")

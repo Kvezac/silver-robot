@@ -33,3 +33,6 @@ class Profile(models.Model):
 
     def full_name(self) -> str:
         return f'{self.last_name} {self.name} {self.middle_name}'
+
+    def short_name(self) -> str:
+        return f'{self.last_name} {self.name[0]}.{self.middle_name[0]}.'

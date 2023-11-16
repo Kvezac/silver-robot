@@ -1,14 +1,14 @@
 {% load static %}
 
-<div id="top-alert" class="alert alert-warning alert-dismissible fade show">
-    {% for message in messages %}
-        <div class="text-center">
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
-
-</div>
-
-
-<script src="{% static 'user/js/base.js' %}"></script>
+{% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="error-message">{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
 

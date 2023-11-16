@@ -2,13 +2,7 @@
 {% load static %}
 {% load mptt_tags %}
 {% block content %}
-{#    {% block navbar %}#}
-{#{% include 'block/navbar.html' %}#}
-{#    {% endblock %}#}
     <div class="container">
-{% block navbar %}
-{% include 'block/navbar.html' %}
-{% endblock %}
         <div class="row">
             <div class="col-xl-5 mt-5">
                 <div class="card  shadow p-3 mb-5 bg-body rounded">
@@ -93,7 +87,7 @@
                         <p class="text-muted mb-2 font-13"><strong>Зарплата :</strong> <span
                                 class="ms-2">{{ employee.salary }}&#8381;</span>
                         </p>
-                        {% if employee.get_parent == request.user.profile.employee_set.all.first %}
+                        {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
                             <div class="row mt-3">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a class="btn btn-primary mb-1" href="{% url 'company:edit-employee' %}">Изменить
