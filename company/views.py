@@ -55,3 +55,6 @@ def edit_employee(request):
         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
     return render(request, 'company/edit_employee.html', {'form': form})
 
+
+def search_results(request):
+    return None

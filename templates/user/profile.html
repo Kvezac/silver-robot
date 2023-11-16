@@ -2,7 +2,13 @@
 {% load static %}
 {% load mptt_tags %}
 {% block content %}
+{#    {% block navbar %}#}
+{#{% include 'block/navbar.html' %}#}
+{#    {% endblock %}#}
     <div class="container">
+{% block navbar %}
+{% include 'block/navbar.html' %}
+{% endblock %}
         <div class="row">
             <div class="col-xl-5 mt-5">
                 <div class="card  shadow p-3 mb-5 bg-body rounded">

@@ -1,27 +1,57 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block navbar %}
-{% include 'block/navbar.html' %}
-{% endblock %}
 {% block content %}
     {% load mptt_tags %}
     {% block css %}
-        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+        {#        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">#}
     {% endblock %}
-{#    <div>#}
-{#        <div>#}
-{#            <ul>#}
-{#                {% recursetree employees %}#}
-{#                    <li>#}
-{#                        <a href="{{ node.id }}">{{ node.name }}</a>#}
-{#                        {% if not node.is_leaf_node %}#}
-{#                            <ul class="children">#}
-{#                                {{ children }}#}
-{#                            </ul>#}
-{#                        {% endif %}#}
-{#                    </li>#}
-{#                {% endrecursetree %}#}
-{#            </ul>#}
+    {% include 'block/header.html' %}
+    <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
+        <div class="row flex-grow-sm-1 flex-grow-0">
+            {% include 'block/navbar.html' %}
+            <main class="col overflow-auto h-100">
+                <ul>
+                    {% recursetree employees %}
+                        <li>
+                            <a href="{{ node.id }}">{{ node.name }}</a>
+                            {% if not node.is_leaf_node %}
+                                <ul class="children">
+                                    {{ children }}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                </ul>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+
+{#{% extends 'base/base.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#    {% load mptt_tags %}#}
+{#    {% block css %}#}
+{#        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">#}
+{#    {% endblock %}#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#                {% include 'block/navbar.html' %}#}
+{#            <div class="col-md-3">#}
+{#                <ul>#}
+{#                    {% recursetree employees %}#}
+{#                        <li>#}
+{#                            <a href="{{ node.id }}">{{ node.name }}</a>#}
+{#                            {% if not node.is_leaf_node %}#}
+{#                                <ul class="children">#}
+{#                                    {{ children }}#}
+{#                                </ul>#}
+{#                            {% endif %}#}
+{#                        </li>#}
+{#                    {% endrecursetree %}#}
+{#                </ul>#}
+{#            </div>#}
 {#        </div>#}
 {#    </div>#}
-{% endblock %}
+{#{% endblock %}#}
