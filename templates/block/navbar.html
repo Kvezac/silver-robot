@@ -199,24 +199,24 @@
 {#    <div class="row flex-grow-sm-1 flex-grow-0">#}
 
 <aside class="col-sm-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3">
-    <div class="bg-dark border rounded-3 p-1 min-vh-100 sticky-top">
+    <div class="bg-inherit border rounded-3 p-1 min-vh-100 sticky-top">
         <ul class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate">
             <li class="nav-item">
                 <a href="{% url 'company:list-employee' %}" class="nav-link px-2 text-truncate">
                     <i class="bi bi-house fs-5"></i>
-                    <span class="d-none d-sm-inline text-light">Главная</span>
+                    <span class="d-none d-sm-inline text-dark">Главная</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'company:list-employee' %}" class="nav-link px-2 text-truncate">
+                <a href="{% url 'company:list-employee-all' %}" class="nav-link px-2 text-truncate">
                     <i class="bi bi-house fs-5"></i>
-                    <span class="d-none d-sm-inline text-light">Все сотрудники</span>
+                    <span class="d-none d-sm-inline text-dark">Все сотрудники</span>
                 </a>
             </li>
             <li>
                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                     <i class="fs-4 bi-speedometer2"></i> <span
-                        class="ms-1 d-none d-sm-inline text-light">Подразделения</span> </a>
+                        class="ms-1 d-none d-sm-inline text-dark">Подразделения</span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                     {% departament_menu %}
                 </ul>

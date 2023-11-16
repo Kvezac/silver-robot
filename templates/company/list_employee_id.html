@@ -3,6 +3,11 @@
 {% load mptt_tags %}
 
 {% block content %}
+        {% include 'block/header.html' %}
+    <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
+        <div class="row flex-grow-sm-1 flex-grow-0">
+            {% include 'block/navbar.html' %}
+            <main class="col overflow-auto h-100">
     <h3>Сотрудники</h3>
     <ul>
         {% recursetree nodes %}
@@ -34,4 +39,7 @@
             </li>
         {% endrecursetree %}
     </ul>
+            </main>
+        </div>
+    </div>
 {% endblock %}
