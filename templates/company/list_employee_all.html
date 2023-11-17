@@ -2,20 +2,32 @@
 {% load static %}
 {% load mptt_tags %}
 
-{% include 'block/header.html' %}
+{% include 'block/header.html' with request=request %}
 <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
     <div class="row flex-grow-sm-1 flex-grow-0">
         {% include 'block/navbar.html' %}
         <main class="col overflow-auto h-100">
-            {% recursetree nodes %}
-                <div class="bg-light mb-3 border rounded-3 p-3">
-                    <a class="btn btn__dark" href="{% url 'user:profile' %}">
-                        {{ node.name.full_name }}
-                        {{ node.position }}
-                        {{ node.salary }}
-                    </a>
-                </div>
-            {% endrecursetree %}
+            <ul>
+                {% recursetree employees %}
+                    <li>
+                        <a href="{{ node.id }}">{{ node.name }}</a>
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            </ul>
+{#            {% recursetree nodes %}#}
+{#                <div class="bg-light mb-3 border rounded-3 p-3">#}
+{#                    <a class="btn btn__dark" href="{% url 'user:profile' %}">#}
+{#                        {{ node.name.full_name }}#}
+{#                        {{ node.position }}#}
+{#                        {{ node.salary }}#}
+{#                    </a>#}
+{#                </div>#}
+{#            {% endrecursetree %}#}
         </main>
     </div>
 </div>

@@ -11,13 +11,14 @@
             {#            </form>#}
             <form action="{% url 'company:search-results' %}" method="get" class="form-inline my-2 my-lg-0">
                 <input name="q" type="text" class="form-control mr-sm-2" placeholder="Поиск..." aria-label="Поиск">
-{#                <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
+                {#                <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
             </form>
             <div class="flex-shrink-0 dropdown">
                 <a href="{% url 'user:profile' %}" class="d-block link-dark text-decoration-none dropdown-toggle"
                    id="dropdownUser2"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ profile.image.url }}" alt="user" width="32" height="32"
+                    {{ request.user.profile.short_name }}
+                    <img src="{{ request.user.profile.image.url }}" alt="user" width="32" height="32"
                          class="rounded-circle text-light">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2">

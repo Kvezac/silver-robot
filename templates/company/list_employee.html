@@ -5,65 +5,29 @@
     {% block css %}
         {#        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">#}
     {% endblock %}
-    {% include 'block/header.html' %}
+    {% include 'block/header.html' with request=request %}
     <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
         <div class="row flex-grow-sm-1 flex-grow-0">
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
-                <div class="bg-light mb-3border rounded-3 p-3">
+                <div><div class="bg-light mb-3 border rounded-3 p-3">
                 <div class="bg-light mb-3 border rounded-3 p-3">{{ levels }}</div>
                 <div class="bg-light mb-3 border rounded-3 p-3">M{{ managers }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">A{{ avg_subordinates }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">Minimum Salary: {{ stats.min_salary|floatformat:2 }}</div>
+                <div class="bg-light mb-3 border rounded-3 p-3">A{{ avg_subordinates }}</div></div>
+
+                <div><div class="bg-light mb-3 border rounded-3 p-3">Minimum Salary: {{ stats.min_salary|floatformat:2 }}</div>
                 <div class="bg-light mb-3 border rounded-3 p-3">Maximum Salary: {{ stats.max_salary|floatformat:2 }}</div>
                 <div class="bg-light mb-3 border rounded-3 p-3">Average Salary: {{ stats.avg_salary|floatformat:2 }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">Sum Salary: {{ stats.sum_salary|floatformat:2 }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">L {{ longest_employment.age }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">S {{ shortest_employment.age }}</div>
+                <div class="bg-light mb-3 border rounded-3 p-3">Sum Salary: {{ stats.sum_salary|floatformat:2 }}</div></div>
+
+                <div><div class="bg-light mb-3 border rounded-3 p-3">L {{ longest_employment.age }}</div>
+                <div class="bg-light mb-3 border rounded-3 p-3">S {{ shortest_employment.age }}</div></div>
+
+                    <div><div class="bg-light mb-3 border rounded-3 p-3">4</div></div>
 
 
-                {#                 <ul>#}
-                {#                    {% recursetree employees %}#}
-                {#                        <li>#}
-                {#                            <a href="{{ node.id }}">{{ node.name }}</a>#}
-                {#                            {% if not node.is_leaf_node %}#}
-                {#                                <ul class="children">#}
-                {#                                    {{ children }}#}
-                {#                                </ul>#}
-                {#                            {% endif %}#}
-                {#                        </li>#}
-                {#                    {% endrecursetree %}#}
-                {#                </ul>#}
+
             </main>
         </div>
     </div>
 {% endblock %}
-
-
-{#{% extends 'base/base.html' %}#}
-{#{% load static %}#}
-{#{% block content %}#}
-{#    {% load mptt_tags %}#}
-{#    {% block css %}#}
-{#        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">#}
-{#    {% endblock %}#}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#                {% include 'block/navbar.html' %}#}
-{#            <div class="col-md-3">#}
-{#                <ul>#}
-{#                    {% recursetree employees %}#}
-{#                        <li>#}
-{#                            <a href="{{ node.id }}">{{ node.name }}</a>#}
-{#                            {% if not node.is_leaf_node %}#}
-{#                                <ul class="children">#}
-{#                                    {{ children }}#}
-{#                                </ul>#}
-{#                            {% endif %}#}
-{#                        </li>#}
-{#                    {% endrecursetree %}#}
-{#                </ul>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}

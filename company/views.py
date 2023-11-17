@@ -87,6 +87,3 @@ def search_results(request):
 def change_boss(request):
     return None
 
-
-def list_employee_all(request):
-    return None
