@@ -20,7 +20,7 @@ def list_employee(request):
     title = 'Главная страница'
     levels = Employee.objects.all().count()
     managers = Employee.objects.exclude(parent=True).count()
-    avg_subordinates = Employee.objects.aggregate(avg=Avg('children'))['avg']
+    avg_subordinates = Employee.objects.aggregate(avg=Avg('children'))['avg']  # что-то не так
     stats = Employee.objects.aggregate(min_salary=Min('salary'), max_salary=Max('salary'), sum_salary=Sum('salary'),
                                        avg_salary=Avg('salary'))
     min_hire_date = Employee.objects.exclude(hire_date=None).aggregate(min=Min('hire_date'))['min']

@@ -37,55 +37,69 @@
                 {#                    </div>#}
                 {#                </div>#}
                 <div class="row">
-                    <div class="col-sm-6 mb-4">
-                        <div class="card">
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow h-100">
                             <div class="card-header">
                                 Featured 1
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Статистика по сотрудникам</h5>
+                                <p class="card-text mb-2 font-13"><strong>Число сотрудников:</strong> {{ levels }}</p>
+                                <p class="card-text mb-2 font-13">Количество менеджеров: {{ managers }}</p>
+                                <p class="card-text mb-2 font-13">Среднее количество
+                                    подчиненных: {{ avg_subordinates }}</p>
+                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mb-4">
-                        <div class="card">
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow h-100">
                             <div class="card-header">
                                 Featured 2
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Статистика по оплате</h5>
+                                <p class="card-text mb-2 font-13"><strong>Общая сумма
+                                    зарплат:</strong> {{ stats.sum_salary|floatformat:2 }}&#8381;</p>
+                                <p class="card-text mb-2 font-13"><strong>Средняя
+                                    зарплата:</strong> {{ stats.avg_salary|floatformat:2 }}&#8381;</p>
+                                <p class="card-text mb-2 font-13"><strong>Максимальная
+                                    зарплата:</strong> {{ stats.max_salary|floatformat:2 }}&#8381;</p>
+                                <p class="card-text mb-2 font-13"><strong>Минимальная
+                                    зарплата:</strong> {{ stats.min_salary|floatformat:2 }}&#8381;</p>
+                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mb-4">
-                        <div class="card">
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow h-100">
                             <div class="card-header">
                                 Featured 3
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Статистика по количеству отработанных лет</h5>
+                                <p class="card-text mb-2 font-13"><strong>Самый большой стаж в
+                                    компании:</strong> {{ longest_employment.age }} лет</p>
+                                <p class="card-text mb-2 font-13"><strong>Самый маленький стаж в компании:</strong>
+                                    {% if shortest_employment.age %}
+                                        {{ longest_employment.age }} лет
+                                    {% else %}
+                                        Работает менее года
+                                    {% endif %}
+                                </p>
+                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <div class="card">
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow h-100">
                             <div class="card-header">
-                                Featured 1
+                                Featured 4
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <p class="card-text mb-2 font-13"><strong> {{ longest_employment.age }}</strong></p>
+{#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>
