@@ -7,6 +7,9 @@ from user.models import Profile
 
 
 class Position(models.Model):
+    """
+        Model Employee positions in a company
+    """
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, blank=True)
     date_create = models.DateField(auto_now_add=True)
@@ -20,6 +23,10 @@ class Position(models.Model):
 
 
 class Employee(MPTTModel):
+    """
+        The Employee model represents employees in a company.
+    """
+
     name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
     position = models.ForeignKey('Position', on_delete=models.PROTECT, null=True, blank=True)
     hire_date = models.DateField()
@@ -38,6 +45,9 @@ class Employee(MPTTModel):
         return f'{self.name.last_name}'
 
     def age(self) -> int:
+        """
+            Returns the number of years worked based on the hire date.
+        """
         today = date.today()
         if self.hire_date:
             return today.year - self.hire_date.year - (
@@ -46,14 +56,23 @@ class Employee(MPTTModel):
             return 0
 
     def get_parent(self) -> object:
+        """
+           Returns the employee's parent.
+        """
         ancestors = self.get_ancestors()
         parent = ancestors.last()
         return parent if parent is not None else '-'
 
     def get_child_count(self) -> int:
+        """
+            Returns the number of descendants of the employee.
+        """
         child_count = self.get_descendant_count()
         return child_count
 
     def get_descendant(self):
+        """
+            Returns all descendants of an employee.
+        """
         descendant = self.get_descendants(include_self=True)
         return descendant

@@ -2,13 +2,15 @@
 {% load static %}
 {##}
 {% block css %}
-    <link href="{% static 'company/css/index.css' %}" rel="stylesheet">
+{#    <link href="{% static 'company/css/index.css' %}" rel="stylesheet">#}
 {% endblock %}
 
 
 {% block content %}
-    <section>
+        {% include 'block/navbar.html' %}
+        <section>
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-3">
                     <h1 class="text-light mt-5">Добро пожаловать</h1>

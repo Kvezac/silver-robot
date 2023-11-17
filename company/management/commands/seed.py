@@ -5,12 +5,15 @@ from company.management.decorators.clockdeco import clock
 
 
 class Command(BaseCommand):
+    """
+        The team fills the employee database with the generated data.
+    """
     help = 'Заполняет базу сотрудников сгенерированными данными'
 
     def add_arguments(self, parser):
-        parser.add_argument('position', type=int, nargs='?', default=20,
+        parser.add_argument('position', type=int, nargs='?', default=10,
                             help='Количество создаваемых должностей')
-        parser.add_argument('total_employee', type=int, nargs='?', default=500,
+        parser.add_argument('total_employee', type=int, nargs='?', default=50,
                             help='Количество создаваемых сотрудников')
 
     @clock
@@ -19,7 +22,7 @@ class Command(BaseCommand):
         Runs commands:
          clear_table() clearing tables, does not reset the id counter
          creat_position() creates random positions with a given default quantity 20
-         creat_employee() creates employees by levels with a given number
+         creat_employee() creates employees by levels with a given number default quantity 500
         """
         clear_table()
         position = kwargs['position']

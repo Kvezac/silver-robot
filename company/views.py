@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, Avg, Min, Max, Sum
+from django.db.models import Avg, Min, Max, Sum
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from company.forms import EmployeeForms
 from company.models import Employee
@@ -40,11 +41,29 @@ def list_employee(request):
 
 
 def list_employee_all(request):
-    nodes = Employee.objects.all()
+    employees = Employee.objects.all()
+    page = request.GET.get('page')
+    result = 10
     title = 'Все сотрудники'
+    paginator = Paginator(employees, result)
+    try:
+        employees = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        employees = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        employees = paginator.page(page)
+    page = int(page)
+    left_index = page - 2 if page > 2 else 1
+    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
+    custom_range = range(left_index, right_index)
+
     context = {
         'title': title,
-        'nodes': nodes,
+        'employees': employees,
+        'paginator': paginator,
+        'custom_range': custom_range
     }
     return render(request, 'company/list_employee_all.html', context)
 
@@ -86,4 +105,3 @@ def search_results(request):
 
 def change_boss(request):
     return None
-
