@@ -10,23 +10,86 @@
         <div class="row flex-grow-sm-1 flex-grow-0">
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
-                <div><div class="bg-light mb-3 border rounded-3 p-3">
-                <div class="bg-light mb-3 border rounded-3 p-3">{{ levels }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">M{{ managers }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">A{{ avg_subordinates }}</div></div>
-
-                <div><div class="bg-light mb-3 border rounded-3 p-3">Minimum Salary: {{ stats.min_salary|floatformat:2 }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">Maximum Salary: {{ stats.max_salary|floatformat:2 }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">Average Salary: {{ stats.avg_salary|floatformat:2 }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">Sum Salary: {{ stats.sum_salary|floatformat:2 }}</div></div>
-
-                <div><div class="bg-light mb-3 border rounded-3 p-3">L {{ longest_employment.age }}</div>
-                <div class="bg-light mb-3 border rounded-3 p-3">S {{ shortest_employment.age }}</div></div>
-
-                    <div><div class="bg-light mb-3 border rounded-3 p-3">4</div></div>
-
-
-
+                {#                <div class="d-flex justify-content-lg-between">#}
+                {#                    <div class="bg-light mb-3 border rounded-3 p-3">#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">{{ levels }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">M{{ managers }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">A{{ avg_subordinates }}</div>#}
+                {#                    </div>#}
+                {#                    <div  class="bg-light mb-3 border rounded-3 p-3">#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">Minimum#}
+                {#                            Salary: {{ stats.min_salary|floatformat:2 }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">Maximum#}
+                {#                            Salary: {{ stats.max_salary|floatformat:2 }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">Average#}
+                {#                            Salary: {{ stats.avg_salary|floatformat:2 }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">Sum#}
+                {#                            Salary: {{ stats.sum_salary|floatformat:2 }}</div>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div  class="bg-light mb-3 border rounded-3 p-3">#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">L {{ longest_employment.age }}</div>#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">S {{ shortest_employment.age }}</div>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div  class="bg-light mb-3 border rounded-3 p-3">#}
+                {#                        <div class="bg-light mb-3 border rounded-3 p-3">4</div>#}
+                {#                    </div>#}
+                {#                </div>#}
+                <div class="row">
+                    <div class="col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Featured 1
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Featured 2
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Featured 3
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                Featured 1
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
