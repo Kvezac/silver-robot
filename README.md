@@ -33,6 +33,18 @@ python manage.py seed 200 50000
 ```commandline
 python manage.py seed
 ```
+* Заполнить базу профилями не являющимися сотрудниками.
+Команда имеет один позиционный аргумент:
+- Количество профилей 'total_profile' default=20
+
+Пример с аргументами.
+```commandline
+python manage.py seed_user 50
+```
+Пример без аргументов:
+```commandline
+python manage.py seed_user
+```
 Запуск проекта:
 ```commandline
 python manage.py runserver

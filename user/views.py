@@ -65,10 +65,12 @@ def user_profile(request):
     try:
         employee = Employee.objects.get(name=profile.id)
     except Employee.DoesNotExist:
+        print("None")
         return render(request, 'user/profile.html', context)
 
     else:
-        context['employee'] = employee,
+        print(employee.get_parent())
+        context['employee'] = employee
         return render(request, 'user/profile.html', context)
 
 

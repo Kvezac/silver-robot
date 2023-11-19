@@ -3,7 +3,7 @@
 {% block content %}
     {% load mptt_tags %}
     {% block css %}
-        {#        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">#}
+                <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
     {% endblock %}
     {% include 'block/header.html' with request=request %}
     <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
@@ -22,7 +22,7 @@
                                 <p class="card-text mb-2 font-13">Количество менеджеров: {{ managers }}</p>
                                 <p class="card-text mb-2 font-13">Среднее количество
                                     подчиненных: {{ avg_subordinates }}</p>
-                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                     зарплата:</strong> {{ stats.max_salary|floatformat:2 }}&#8381;</p>
                                 <p class="card-text mb-2 font-13"><strong>Минимальная
                                     зарплата:</strong> {{ stats.min_salary|floatformat:2 }}&#8381;</p>
-                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                         Работает менее года
                                     {% endif %}
                                 </p>
-                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text mb-2 font-13"><strong> {{ longest_employment.age }}</strong></p>
-                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
                     </div>
