@@ -35,4 +35,6 @@ class Profile(models.Model):
         return f'{self.last_name} {self.name} {self.middle_name}'
 
     def short_name(self) -> str:
-        return f'{self.last_name} {self.name[0]}.{self.middle_name[0]}.'
+        if self.last_name:
+            return f'{self.last_name} {self.name[0].upper()}.{self.middle_name[0].upper()}.'
+        return ''
