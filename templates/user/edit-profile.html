@@ -9,23 +9,33 @@
                     <form class="row g-3 needs-validation" action="{% url 'user:edit-profile' %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="col-md-2 d-flex flex-column">
-                            <img src="{{ form.initial.image.url }}"
-                                 class="img-fluid rounded-circle" alt="profile-images">
-                            <div class="mt-2">
-                                <input type="file" class="form-control" id="imageInput" name="image" accept="image/*"
-                                       value="Выбрать изображение">
-                            </div>
-                        </div>
+                        {#                        <div class="col-md-2 d-flex flex-column">#}
+                        {#                            <img src="{{ form.initial.image.url }}"#}
+                        {#                                 class="img-fluid rounded-circle" alt="profile-images">#}
+                        {#                            <div class="mt-2">#}
+                        {#                                <input type="file" class="form-control" id="imageInput" name="image" accept="image/*"#}
+                        {#                                       value="Выбрать изображение">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
 {#                        <div class="col-md-2 d-flex flex-column">#}
-{#                            <label for="imageInput">#}
-{#                                <img src="{{ form.initial.image.url }}" class="img-fluid rounded-circle"#}
-{#                                     alt="profile-images">#}
-{#                                <button class="btn btn-primary" type="button">Выбрать изображение</button>#}
-{#                            </label>#}
-{#                            <input type="file" class="form-control visually-hidden" id="imageInput" name="image"#}
-{#                                   accept="image/*">#}
+{#                            <img src="{{ form.initial.image.url }}" class="img-fluid rounded-circle"#}
+{#                                 alt="profile-images">#}
+{#                            <div class="mt-2">#}
+{#                                <label for="imageInput" class="btn btn-primary">Выбрать изображение</label>#}
+{#                                <input type="file" id="imageInput" name="image" accept="image/*" style="display: none;">#}
+{#                            </div>#}
 {#                        </div>#}
+
+                        <div class="col-md-2 d-flex flex-column">
+                            <label for="imageInput">
+                                <img src="{{ form.initial.image.url }}" class="img-fluid rounded-circle"
+                                     alt="profile-images">
+                                <button class="btn btn-primary" type="button">Выбрать изображение</button>
+                            </label>
+                            <input type="file" class="form-control visually-hidden" id="imageInput" name="image"
+                                   accept="image/*">
+                        </div>
 
 
                         <div class="col-md-10 d-flex flex-column">

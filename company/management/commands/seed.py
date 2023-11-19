@@ -11,9 +11,9 @@ class Command(BaseCommand):
     help = 'Заполняет базу сотрудников сгенерированными данными'
 
     def add_arguments(self, parser):
-        parser.add_argument('position', type=int, nargs='?', default=10,
+        parser.add_argument('position', type=int, nargs='?', default=20,
                             help='Количество создаваемых должностей')
-        parser.add_argument('total_employee', type=int, nargs='?', default=50,
+        parser.add_argument('total_employee', type=int, nargs='?', default=500,
                             help='Количество создаваемых сотрудников')
 
     @clock
