@@ -18,14 +18,14 @@
                     {#                            </button>#}
                     {#                        </div>#}
                     {#                    {% endif %}#}
-                    <div class="card text-white bg-success mt-3 border border-black">
+                    <div class="card text-white bg-success mb-3 mt-4 border border-black shadow">
                         <div class="card-header"><h3 class="text-center font-weight-light my-3">Создать аккаунт</h3>
                         </div>
                         <div class="card-body special-card d-flex flex-column align-items-center">
                             <form action="{% url 'user:signup' %}" method="post">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label class="small mt-3" for="{{ form.username.id_for_label }}">
+                                <div class="form-group ">
+                                    <label class="small mt-1" for="{{ form.username.id_for_label }}">
                                         Имя пользователя
                                     </label>
                                     {{ form.username }}

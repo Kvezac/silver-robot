@@ -14,7 +14,7 @@ def home(request):
 
 
 # @login_required
-def list_employee(request):
+def main_employee(request):
     """
         The main page shows company statistics
     """
@@ -37,7 +37,7 @@ def list_employee(request):
                'shortest_employment': shortest_employment,
 
                }
-    return render(request, 'company/list_employee.html', context=context)
+    return render(request, 'company/main_employee.html', context=context)
 
 
 def list_employee_all(request):

@@ -3,7 +3,7 @@
 {% block content %}
     {% load mptt_tags %}
     {% block css %}
-                <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
     {% endblock %}
     {% include 'block/header.html' with request=request %}
     <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
@@ -11,28 +11,37 @@
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
                 <div class="row">
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-6 mb-4">
+                        {# first card #}
                         <div class="card shadow h-100">
                             <div class="card-header">
-                                Featured 1
+                                <h3 class="text-center font-weight-light my-3">
+                                    Статистика по сотрудникам
+                                </h3>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Статистика по сотрудникам</h5>
                                 <p class="card-text mb-2 font-13"><strong>Число сотрудников:</strong> {{ levels }}</p>
-                                <p class="card-text mb-2 font-13">Количество менеджеров: {{ managers }}</p>
-                                <p class="card-text mb-2 font-13">Среднее количество
-                                    подчиненных: {{ avg_subordinates }}</p>
-                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <p class="card-text mb-2 font-13"><strong>Количество менеджеров:</strong> {{ managers }}
+                                </p>
+                                <p class="card-text mb-2 font-13"><strong>Среднее количество
+                                    подчиненных:</strong> {{ avg_subordinates }}</p>
+                                <div class="card-footer bg-transparent border-success text-center">
+                                    <div class="large ">
+                                        {#                                    <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-6 mb-4">
                         <div class="card shadow h-100">
                             <div class="card-header">
-                                Featured 2
+                                <h3 class="text-center font-weight-light my-3">
+                                    Статистика по оплате
+                                </h3>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Статистика по оплате</h5>
+{#                                <h5 class="card-title">Статистика по оплате</h5>#}
                                 <p class="card-text mb-2 font-13"><strong>Общая сумма
                                     зарплат:</strong> {{ stats.sum_salary|floatformat:2 }}&#8381;</p>
                                 <p class="card-text mb-2 font-13"><strong>Средняя
@@ -41,14 +50,18 @@
                                     зарплата:</strong> {{ stats.max_salary|floatformat:2 }}&#8381;</p>
                                 <p class="card-text mb-2 font-13"><strong>Минимальная
                                     зарплата:</strong> {{ stats.min_salary|floatformat:2 }}&#8381;</p>
-                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <div class="card-footer bg-transparent border-success text-center">
+                                                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-6 mb-4">
                         <div class="card shadow h-100">
                             <div class="card-header">
-                                Featured 3
+                                <h3 class="text-center font-weight-light my-3">
+                                    Статистика по количеству отработанных лет
+                                </h3>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Статистика по количеству отработанных лет</h5>
@@ -61,11 +74,13 @@
                                         Работает менее года
                                     {% endif %}
                                 </p>
-                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <div class="card-footer bg-transparent border-success text-center">
+                                    {#                                    <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-6 mb-4">
                         <div class="card shadow h-100">
                             <div class="card-header">
                                 Featured 4
@@ -73,7 +88,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text mb-2 font-13"><strong> {{ longest_employment.age }}</strong></p>
-                                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>

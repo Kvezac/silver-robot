@@ -1,0 +1,8 @@
+{{ request.user }}
+
+<form method="post" action="{% url 'user:delete_user' user.id %}">
+    {% csrf_token %}
+{#    <p>Are you sure you want to delete {{ user.name }}?</p>#}
+    <button type="button" class="btn btn-danger">Удалить</button>
+</form>
+<td>

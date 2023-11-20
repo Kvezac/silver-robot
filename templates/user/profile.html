@@ -1,103 +1,125 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% load mptt_tags %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-5 mt-5">
-                <div class="card  shadow p-3 mb-5 bg-body rounded">
-                    <div class="card-body">
-                        {#                        <div class="d-flex align-items-start">#}
-                        <div class="col-md-5">
-                            {% if profile.image %}
-                                <img src="{{ profile.image.url }}" class="rounded-circle avatar-lg img-thumbnail"
-                                     alt="profile-image">
-                            {% else %}
-                                <img {% if profile.gender|lower == "male" %}
-                                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                {% else %}
-                                    src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                                {% endif %}
-                                    class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
-                            {% endif %}
-                        </div>
+    {% block css %}
+        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+    {% endblock %}
+    {% include 'block/header.html' with request=request %}
+    <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
+        <div class="row flex-grow-sm-1 flex-grow-0 mb-5">
+            {% include 'block/navbar.html' %}
 
-                        <div class="mt-3">
-                            <h4 class="font-13 text-uppercase">Личная карточка:</h4>
-                            <p class="text-muted font-13 mb-3">
-                            </p>
-                            <p class="text-muted mb-2 font-13"><strong>Полное имя :</strong> <span
-                                    class="ms-2">{{ profile.full_name|capfirst }}</span>
-                            </p>
+            <main class="col overflow-auto h-100">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="card text-dark bg-light mb-3 border border-black shadow h-100">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-3">
+                                    Служебные данные
+                                </h3>
+                            </div>
+                            <div class="card-body special-card d-flex flex-column align-items-left">
+                                <p class="text-muted mb-2 font-13"><strong>Руководитель :</strong> <span
+                                        class="ms-2">{{ employee.get_parent }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Должность :</strong> <span
+                                        class="ms-2">{{ employee.position }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Количество сотрудников в подчинении
+                                    :</strong>
+                                    <span
+                                            class="ms-2">{{ employee.get_child_count }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Дата начала работы :</strong> <span
+                                        class="ms-2">{{ employee.hire_date }}</span>
+                                </p>
 
-                            <p class="text-muted mb-2 font-13"><strong>Дата Рождения :</strong> <span
-                                    class="ms-2">{{ profile.date_of_bth }}</span>
-                            </p>
-                            <p class="text-muted mb-2 font-13"><strong>Пол :</strong> <span
-                                    class="ms-2">{{ profile.get_gender_display }}</span>
-                            </p>
-                            <p class="text-muted mb-2 font-13"><strong>Полных лет :</strong> <span
-                                    class="ms-2">{{ profile.age }}</span>
-                            </p>
-                            <p class="text-muted mb-2 font-13"><strong>Телефон :</strong><span
-                                    class="ms-2">{{ profile.phone }}</span>
-                            </p>
-                            <p class="text-muted mb-1 font-13"><strong>Место проживания :</strong> <span
-                                    class="ms-2">{{ profile.city }}</span>
-                            </p>
-                            {% if request.user.pk == profile.pk %}
-                                <div class="row mt-3">
-                                    <div class="col-md-12 d-flex justify-content-end">
-                                        <a class="btn btn-primary mb-1" href="{% url 'user:edit-profile' %}">Изменить
-                                            личные данные</a>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-7 mt-5">
-                <div class="card  shadow p-3 mb-5 bg-body rounded">
-                    <div class="card-body">
-                        <div class="mt-3">
-                            <h4 class="font-13 text-uppercase">Служебные данные сотрудника:</h4>
-                            <p class="text-muted font-13 mb-3">
-                            </p>
-                        </div>
+                                <p class="text-muted mb-2 font-13"><strong>Лет отработано :</strong> <span
+                                        class="ms-2">{{ employee.age }}</span>
+                                <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
+                                        class="ms-2">{{ profile.user.email }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Зарплата :</strong> <span
+                                        class="ms-2">{{ employee.salary }}&#8381;.</span>
+                                </p>
+                            </div>
 
-                        <p class="text-muted mb-2 font-13"><strong>Руководитель :</strong> <span
-                                class="ms-2">{{ employee.get_parent }}</span>
-                        </p>
-                        <p class="text-muted mb-2 font-13"><strong>Должность :</strong> <span
-                                class="ms-2">{{ employee.position }}</span>
-                        </p>
-                        <p class="text-muted mb-2 font-13"><strong>Количество сотрудников в подчинении :</strong> <span
-                                class="ms-2">{{ employee.get_child_count }}</span>
-                        </p>
-                        <p class="text-muted mb-2 font-13"><strong>Дата начала работы :</strong> <span
-                                class="ms-2">{{ employee.hire_date }}</span>
-                        </p>
-
-                        <p class="text-muted mb-2 font-13"><strong>Лет отработано :</strong> <span
-                                class="ms-2">{{ employee.age }}</span>
-                        <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                class="ms-2">{{ profile.user.email }}</span>
-                        </p>
-                        <p class="text-muted mb-2 font-13"><strong>Зарплата :</strong> <span
-                                class="ms-2">{{ employee.salary }}&#8381;</span>
-                        </p>
-                        {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
-                            <div class="row mt-3">
-                                <div class="col-md-12 d-flex justify-content-end">
-                                    <a class="btn btn-primary mb-1" href="{% url 'company:edit-employee' %}">Изменить
-                                        данные сотрудника</a>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <div class="large ">
+                                    {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
+                                        <a class="btn btn-secondary btn-sm"
+                                           href="{% url 'company:edit-employee' %}">
+                                            Редактировать данные
+                                        </a>
+                                        {% else %}
+                                        <a class="btn btn-secondary btn-sm disabled" aria-roledescription="disable"
+                                           href="{% url 'company:edit-employee' %}">
+                                            Редактировать данные
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
-                        {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="card text-dark bg-light mb-3 border border-black shadow h-100">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-3">
+                                    Личные данные
+                                </h3>
+                            </div>
+                            <div class="card-body special-card d-flex flex-column align-items-center bg-lighten-xl">
+                                {% if profile.image %}
+                                    <img src="{{ profile.image.url }}"
+                                         class="rounded-circle avatar-lg img-thumbnail" height="150" width="150"
+                                         alt="profile-image">
+                                {% else %}
+                                    <img {% if profile.gender|lower == "male" %}
+                                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                    {% else %}
+                                        src="https://bootdey.com/img/Content/avatar/avatar8.png"
+                                    {% endif %}
+                                        class="rounded-circle avatar-sm img-thumbnail" alt="profile-image">
+                                {% endif %}
+                                <p class="text-muted font-13 mb-3">
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Полное имя :</strong> <span
+                                        class="ms-2">{{ profile.full_name|capfirst }}</span>
+                                </p>
+
+                                <p class="text-muted mb-2 font-13"><strong>Дата Рождения :</strong> <span
+                                        class="ms-2">{{ profile.date_of_bth }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Пол :</strong> <span
+                                        class="ms-2">{{ profile.get_gender_display }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Полных лет :</strong> <span
+                                        class="ms-2">{{ profile.age }}</span>
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Телефон :</strong><span
+                                        class="ms-2">{{ profile.phone }}</span>
+                                </p>
+                                <p class="text-muted mb-1 font-13"><strong>Место проживания :</strong> <span
+                                        class="ms-2">{{ profile.city }}</span>
+                                </p>
+
+
+                            </div>
+
+                            <div class="card-footer bg-transparent border-success text-center">
+                                {% if request.user.pk == profile.pk %}
+                                    <div class="large">
+                                        <a class="btn btn-secondary btn-sm" href="{% url 'user:edit-profile' %}">
+                                            Редактировать данные</a>
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 {% endblock %}

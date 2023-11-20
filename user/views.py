@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from company.models import Employee
 from .forms import SigUpForm, SignInForm, ProfileForm
+from .models import Profile
 
 
 def login_user(request):
@@ -29,7 +30,7 @@ def login_user(request):
 
 
 def signup(request):
-    title = "Регистрация в системе"
+    title = "Регистрация"
     context = {'title': title}
     if request.method == 'GET':
         form = SigUpForm()
@@ -55,6 +56,15 @@ def logout_user(request):
         return redirect('user:login')
 
 
+def delete_user(request, user_id):
+    user = get_object_or_404(Profile, pk=user_id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('company:home')
+    return render(request, 'block/delete_user.html', {'user': user})
+
+
+@login_required
 def user_profile(request):
     profile = request.user.profile
     title = f'Профиль: {profile.short_name()}'

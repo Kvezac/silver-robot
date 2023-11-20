@@ -8,31 +8,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-3 mx-auto">
-{#                    {% if messages or form.non_field_errors %}#}
-                        {#                        <div class="alert#}
-                        {#                        {% if messages %} alert-success {% else %} alert-warning {% endif %}#}
-                        {#                         alert-dismissible fade show" role="alert"#}
-                        {#                             style="margin-top: 50px;">#}
-                        {#                            {% if messages %}#}
-                        {#                                {% for message in messages %}#}
-                        {#                                    {{ message }}#}
-                        {#                                {% endfor %}#}
-                        {#                            {% else %}#}
-                        {#                                {{ form.non_field_errors }}#}
-                        {#                            {% endif %}#}
-                        {#                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-                        {#                                <span aria-hidden="true">&times;</span>#}
-                        {#                            </button>#}
-                        {#                        </div>#}
-{#                    {% endif %}#}
-                    <div class="card text-white bg-success mb-3 mt-4 border border-black">
+                    <div class="card text-white bg-success mb-3 mt-4 border border-black shadow">
                         <div class="card-header"><h3 class="text-center font-weight-light my-3">Авторизация</h3>
                         </div>
                         <div class="card-body special-card d-flex flex-column align-items-center">
                             <form action="{% url 'user:login' %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-group ">
-                                    <label class="small mb-1" for="{{ form.username.id_for_label }}">
+                                    <label class="small mt-1" for="{{ form.username.id_for_label }}">
                                         Имя пользователя
                                     </label>
                                     {{ form.username }}
@@ -43,14 +26,17 @@
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
 
-                                    <input class="btn btn-success stretched-link border border-black" type="submit" value="Авторизоваться">
+                                    <input class="btn btn-success stretched-link border border-black" type="submit"
+                                           value="Авторизоваться">
                                 </div>
-{#                                <a class="small link-info mt-3" href="#">Забыли пароль?</a>#}
+                                {#                                <a class="small link-info mt-3" href="#">Забыли пароль?</a>#}
                             </form>
                         </div>
                         <div class="card-footer text-center">
-                            <div class="small"><a class="link-info" href="{% url 'user:signup' %}">Нужен аккаунт?
-                                Зарегистрируйся!</a>
+                            <div class="small">
+                                <a class="link-info" href="{% url 'user:signup' %}">
+                                    Нужен аккаунт? Зарегистрируйся!
+                                </a>
                             </div>
                         </div>
                     </div>
