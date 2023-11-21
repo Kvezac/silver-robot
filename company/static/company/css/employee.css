@@ -6,3 +6,17 @@ ul ul {
 ul li:hover > ul {
     display: block;
 }
+
+/* Apply a color change after clicking */
+.page-link {
+  transition: color 0.3s;
+}
+
+.page-link:hover {
+  color: #469f15; /* Change to the desired color */
+}
+
+/* Highlight the current page */
+.page-item.active .page-link {
+  background-color: #b0f669; /* Change to the desired highlight color */
+}

@@ -24,7 +24,7 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('company:list-employee')
+                return redirect('company:main-employee')
 
         return render(request, 'user/login.html', context)
 
@@ -56,6 +56,7 @@ def logout_user(request):
         return redirect('user:login')
 
 
+@login_required()
 def delete_user(request, user_id):
     user = get_object_or_404(Profile, pk=user_id)
     if request.method == 'POST':

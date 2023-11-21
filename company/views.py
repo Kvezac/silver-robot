@@ -43,7 +43,7 @@ def main_employee(request):
 def list_employee_all(request):
     employees = Employee.objects.all()
     page = request.GET.get('page')
-    result = 10
+    result = 5
     title = 'Все сотрудники'
     paginator = Paginator(employees, result)
     try:
@@ -70,7 +70,7 @@ def list_employee_all(request):
 
 def list_employee_id(request, level):
     nodes = Employee.objects.filter(level=level)
-    title = f'Департамент уровнь {level}'
+    title = f'Департамент уровень {level}'
     # root_employee_id = current_employee.get_level()
     # print(root_employee_id)
     # nodes = Employee.objects.all()

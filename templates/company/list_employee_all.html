@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block css %}
+<link href="{% static 'company/css/employee.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
     {% include 'block/header.html' with request=request %}
     <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
@@ -25,29 +28,29 @@
         <ul class="pagination justify-content-center">
             {% if employees.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="First">
+                    <a class="page-link border-success shadow" href="?page=1" aria-label="First">
                         <span aria-hidden="true">&laquo;&laquo;</span>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ employees.previous_page_number }}" aria-label="Previous">
+                    <a class="page-link border-success shadow" href="?page={{ employees.previous_page_number }}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
             {% endif %}
             {% for i in custom_range %}
                 <li class="page-item {% if employees.number == i %}active{% endif %}">
-                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    <a class="page-link border-success shadow" href="?page={{ i }}">{{ i }}</a>
                 </li>
             {% endfor %}
             {% if employees.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ employees.next_page_number }}" aria-label="Next">
+                    <a class="page-link border-success shadow" href="?page={{ employees.next_page_number }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ employees.paginator.num_pages }}" aria-label="Last">
+                    <a class="page-link border-success shadow" href="?page={{ employees.paginator.num_pages }}" aria-label="Last">
                         <span aria-hidden="true">&raquo;&raquo;</span>
                     </a>
                 </li>

@@ -1,4 +1,4 @@
-<header class="py-3 mb-4 border-bottom shadow pb-3 ">
+<header class="py-3 mb-4 border-bottom border-success shadow pb-3 ">
     <div class="container-fluid align-items-center d-flex">
         <div class="flex-shrink-1">
             <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none">
@@ -7,7 +7,7 @@
         </div>
         <div class="flex-grow-1 d-flex align-items-center justify-content-between">
             <form action="{% url 'company:search-results' %}" method="get" class="form-inline my-2 my-lg-0">
-                <input name="q" type="text" class="form-control mr-sm-2" placeholder="Поиск..." aria-label="Поиск">
+                <input name="q" type="text" class="form-control mr-sm-2 border-success shadow" placeholder="Поиск..." aria-label="Поиск">
                 {#                <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
             </form>
             <div class="flex-shrink-0 dropdown">
@@ -18,10 +18,10 @@
                     <img src="{{ request.user.profile.image.url }}" alt="user" width="32" height="32"
                          class="rounded-circle text-light">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                <ul class="dropdown-menu dropdown-menu-end border-success shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="{% url 'user:edit-profile' %}">Настройка</a></li>
                     <li><a class="dropdown-item" href="{% url 'user:profile' %}">Профиль</a></li>
-                    <li>
+                    <li class="border-success">
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="{% url 'user:logout' %}">Выход</a></li>

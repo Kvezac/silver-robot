@@ -12,8 +12,8 @@
             <main class="col overflow-auto h-100">
                 <div class="row">
                     <div class="col-md-6 ">
-                        <div class="card text-dark bg-light mb-3 border border-black shadow h-100">
-                            <div class="card-header">
+                        <div class="card text-dark bg-light mb-3 border border-success shadow h-100">
+                            <div class="card-header border-success shadow">
                                 <h3 class="text-center font-weight-light my-3">
                                     Служебные данные
                                 </h3>
@@ -46,25 +46,25 @@
 
                             <div class="card-footer bg-transparent border-success text-center">
                                 <div class="large ">
-                                    {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
-                                        <a class="btn btn-secondary btn-sm"
+{#                                    {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}#}
+                                        <a class="btn btn-success btn-sm"
                                            href="{% url 'company:edit-employee' %}">
                                             Редактировать данные
                                         </a>
-                                        {% else %}
-                                        <a class="btn btn-secondary btn-sm disabled" aria-roledescription="disable"
-                                           href="{% url 'company:edit-employee' %}">
-                                            Редактировать данные
-                                        </a>
-                                    {% endif %}
+{#                                        {% else %}#}
+{#                                        <a class="btn btn-success btn-sm disabled" aria-roledescription="disable"#}
+{#                                           href="{% url 'company:edit-employee' %}">#}
+{#                                            Редактировать данные#}
+{#                                        </a>#}
+{#                                    {% endif %}#}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 ">
-                        <div class="card text-dark bg-light mb-3 border border-black shadow h-100">
-                            <div class="card-header">
+                        <div class="card text-dark bg-light mb-3 border border-success shadow h-100">
+                            <div class="card-header border-success shadow">
                                 <h3 class="text-center font-weight-light my-3">
                                     Личные данные
                                 </h3>
@@ -110,7 +110,7 @@
                             <div class="card-footer bg-transparent border-success text-center">
                                 {% if request.user.pk == profile.pk %}
                                     <div class="large">
-                                        <a class="btn btn-secondary btn-sm" href="{% url 'user:edit-profile' %}">
+                                        <a class="btn btn-success btn-sm" href="{% url 'user:edit-profile' %}">
                                             Редактировать данные</a>
                                     </div>
 
