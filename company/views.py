@@ -95,9 +95,60 @@ def edit_employee(request):
     return render(request, 'company/edit_employee.html', {'form': form})
 
 
+# @login_required
+def select_unassigned_users(request):
+    unassigned_users = Profile.objects.filter(employee__isnull=True)
+    return render(request, 'company/select_unassigned_users.html', {'unassigned_users': unassigned_users})
+
+
 def search_results(request):
     return None
 
 
 def change_boss(request):
     return None
+
+
+def add_employee(request, pk):
+    profile = get_object_or_404(Profile, pk)
+    print(profile)
+    if request.method == 'POST':
+        form = EmployeeForms(request.POST)
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.save()
+            return render(request, 'block/success.html')
+    else:
+        form = EmployeeForms()
+    return render(request, 'company/add_employee.html', {'form': form})
+
+
+def select_level_and_boss(request):
+    if request.method == 'POST':
+        level = request.POST.get('level')
+        boss = request.POST.get('boss')
+        return render(request, 'company/select_position_salary.html', {'level': level, 'boss': boss})
+    return render(request, 'company/select_level_and_boss.html')
+
+
+def select_position_and_salary(request):
+    if request.method == 'POST':
+        position = request.POST.get('position')
+        salary = request.POST.get('salary')
+        return render(request, 'company/confirm_employee.html', {'position': position, 'salary': salary})
+    return render(request, 'company/select_position_and_salary.html')
+
+
+def create_employee(request):
+    if request.method == 'POST' and request.is_ajax():
+        level = request.POST.get('level')
+        manager = request.POST.get('manager')
+        position = request.POST.get('position')
+        email = request.POST.get('email')
+        salary = request.POST.get('salary')
+
+        # Perform validation and create employee
+        # ...
+
+        return JsonResponse({'message': 'Employee created successfully'}, status=200)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
