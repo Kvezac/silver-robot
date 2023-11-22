@@ -1,19 +1,14 @@
 from django import forms
+from django.core.validators import MinValueValidator
 
-from company.models import Employee
-from user.forms import DateInput
+from company.models import Employee, Position
 
 
-class EmployeeForms(forms.ModelForm):
+class AddEmployeeForm(forms.ModelForm):
+    parent = forms.ModelChoiceField(queryset=Employee.objects.all(), label='Начальник')
+    position = forms.ModelChoiceField(queryset=Position.objects.all(), label='Position')
+    salary = forms.DecimalField(label='Salary', validators=[MinValueValidator(0)])
+
     class Meta:
         model = Employee
-        fields = ['name', 'position', 'hire_date', 'salary']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for field in self.fields:
-            if field == 'hire_date':
-                self.fields[field].widget = DateInput()
-
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
+        fields = ['parent', 'position', 'salary']

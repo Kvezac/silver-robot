@@ -14,6 +14,6 @@ urlpatterns = [
     path('', views.home, name='home'),
 
 
-    path('creat-employee', views.create_employee, name='creat-employee')
+    path('add-employee', views.add_employee, name='add-employee')
 
 ]

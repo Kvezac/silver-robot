@@ -217,3 +217,15 @@ tr {
     color: darkolivegreen;
 }
 
+
+.alert-gradient {
+    background: linear-gradient(to top right, #e66465, #9198e5);
+    border-radius: 0px;
+    border: none;
+    color: #fff;
+}
+
+.alert-heading-gradient {
+    color: #fff;
+    font-weight: 900;
+}

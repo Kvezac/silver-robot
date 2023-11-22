@@ -1,14 +1,20 @@
 {% load static %}
 
 {% if form.errors %}
-    <div class="alert alert-danger">
-        <ul>
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <li class="error-message">{{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
+<div class="container p-5">
+    <div class="row no-gutters fixed-bottom">
+        <div class="col-lg-3 col-md-12 m-auto">
+            <div class="alert alert-gradient shadow justify-content-between align-items-center" role="alert">
+                <div>{{ form.non_field_errors }}</div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+                    <span aria-hidden="True">&#10006;</span>
+                </button>
+            </div>
+        </div>
     </div>
+</div>
 {% endif %}
+
+
+<script type="module" src="{% static 'company/js/alert.js' %}"></script>
 

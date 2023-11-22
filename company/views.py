@@ -1,10 +1,11 @@
+from datetime import date
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
-from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from company.forms import EmployeeForms
+from company.forms import AddEmployeeForm
 from company.models import Employee
 from user.models import Profile
 
@@ -71,7 +72,7 @@ def list_employee_all(request):
 
 
 def list_employee_id(request, level):
-    nodes = Employee.objects.filter(level=level)
+    nodes = Employee.objects.filter(level=level).is_not_child()
     title = f'Департамент уровень {level}'
     context = {
         'title': title,
@@ -80,22 +81,22 @@ def list_employee_id(request, level):
     return render(request, 'company/list_employee_id.html', context)
 
 
-def edit_employee(request):
-    if request.method == 'POST':
-        form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
-        if form.is_valid():
-            employee = form.save(commit=False)
-            if employee.get_parent == request.user.profile.employee_set.all().first():
-                employee.save()
-                return redirect('user:profile')
-            else:
-                return redirect('user:profile')
-    else:
-        form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
-    return render(request, 'company/edit_employee.html', {'form': form})
+# def edit_employee(request):
+#     if request.method == 'POST':
+#         form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
+#         if form.is_valid():
+#             employee = form.save(commit=False)
+#             if employee.get_parent == request.user.profile.employee_set.all().first():
+#                 employee.save()
+#                 return redirect('user:profile')
+#             else:
+#                 return redirect('user:profile')
+#     else:
+#         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
+#     return render(request, 'company/edit_employee.html', {'form': form})
 
 
-# @login_required
+@login_required
 def select_unassigned_users(request):
     unassigned_users = Profile.objects.filter(employee__isnull=True)
     return render(request, 'company/select_unassigned_users.html', {'unassigned_users': unassigned_users})
@@ -109,46 +110,16 @@ def change_boss(request):
     return None
 
 
+@login_required
 def add_employee(request, pk):
-    profile = get_object_or_404(Profile, pk)
-    print(profile)
     if request.method == 'POST':
-        form = EmployeeForms(request.POST)
+        form = AddEmployeeForm(request.POST)
         if form.is_valid():
             employee = form.save(commit=False)
+            employee.hire_date = date.today()  # Set the hire date automatically
             employee.save()
-            return render(request, 'block/success.html')
+            return redirect(
+                'company:main-employee')  # Replace 'employee_list' with your actual URL name for the employee list page
     else:
-        form = EmployeeForms()
+        form = AddEmployeeForm()
     return render(request, 'company/add_employee.html', {'form': form})
-
-
-def select_level_and_boss(request):
-    if request.method == 'POST':
-        level = request.POST.get('level')
-        boss = request.POST.get('boss')
-        return render(request, 'company/select_position_salary.html', {'level': level, 'boss': boss})
-    return render(request, 'company/select_level_and_boss.html')
-
-
-def select_position_and_salary(request):
-    if request.method == 'POST':
-        position = request.POST.get('position')
-        salary = request.POST.get('salary')
-        return render(request, 'company/confirm_employee.html', {'position': position, 'salary': salary})
-    return render(request, 'company/select_position_and_salary.html')
-
-
-def create_employee(request):
-    if request.method == 'POST' and request.is_ajax():
-        level = request.POST.get('level')
-        manager = request.POST.get('manager')
-        position = request.POST.get('position')
-        email = request.POST.get('email')
-        salary = request.POST.get('salary')
-
-        # Perform validation and create employee
-        # ...
-
-        return JsonResponse({'message': 'Employee created successfully'}, status=200)
-    return JsonResponse({'error': 'Invalid request'}, status=400)
