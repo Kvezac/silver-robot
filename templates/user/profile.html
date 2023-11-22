@@ -46,17 +46,24 @@
 
                             <div class="card-footer bg-transparent border-success text-center">
                                 <div class="large ">
-{#                                    {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}#}
-                                        <a class="btn btn-success btn-sm"
-                                           href="{% url 'company:edit-employee' %}">
+                                    {% if employee %}
+                                        {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
+                                            <a class="btn btn-success btn-sm"
+                                               href="{% url 'company:edit-employee' employee.id %}">
+                                                Редактировать данные
+                                            </a>
+                                        {% else %}
+                                            <a class="btn btn-success btn-sm disabled" aria-roledescription="disable"
+                                               href="#">
+                                                Редактировать данные
+                                            </a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a class="btn btn-success btn-sm disabled" aria-roledescription="disable"
+                                           href="#">
                                             Редактировать данные
                                         </a>
-{#                                        {% else %}#}
-{#                                        <a class="btn btn-success btn-sm disabled" aria-roledescription="disable"#}
-{#                                           href="{% url 'company:edit-employee' %}">#}
-{#                                            Редактировать данные#}
-{#                                        </a>#}
-{#                                    {% endif %}#}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -108,13 +115,19 @@
                             </div>
 
                             <div class="card-footer bg-transparent border-success text-center">
-                                {% if request.user.pk == profile.pk %}
-                                    <div class="large">
-                                        <a class="btn btn-success btn-sm" href="{% url 'user:edit-profile' %}">
+                                <div class="large">
+                                    {% if request.user.pk == profile.pk %}
+                                        <a class="btn btn-success btn-sm"
+                                           href="{% url 'user:edit-profile' profile.pk %}">
                                             Редактировать данные</a>
-                                    </div>
+                                    {% else %}
+                                        <a class="btn btn-success btn-sm disabled" aria-roledescription="disable"
+                                           href="#">
+                                            Редактировать данные
+                                        </a>
+                                    {% endif %}
+                                </div>
 
-                                {% endif %}
                             </div>
                         </div>
                     </div>

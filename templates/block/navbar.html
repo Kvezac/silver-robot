@@ -1,8 +1,8 @@
 {% load static %}
 {% load department_menu %}
 
-<nav class="col-sm-2 1 d-flex flex-column">
-    <div class="bg-inherit border shadow border-success rounded-3 p-1 min-vh-100 sticky-top h-100">
+<nav class="col-sm-2  d-flex flex-column">
+    <div class="bg-white border shadow border-success rounded-3 p-1 min-vh-100 sticky-top h-100">
         <ul class="nav flex-column  flex-row mb-auto justify-content-between overflow-auto">
             <li class="nav-item">
                 <a href="{% url 'company:main-employee' %}" class="nav-link px-2 text-truncate">
@@ -23,6 +23,12 @@
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                     {% departament_menu %}
                 </ul>
+            </li>
+            <li>
+                <a href="{% url 'company:unassigned-users' %}" class="nav-link px-2 text-truncate">
+                    <i class="bi bi-house fs-5"></i>
+                    <span class="d-none d-sm-inline text-dark">Кандидаты</span>
+                </a>
             </li>
         </ul>
     </div>

@@ -1,0 +1,88 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    {% block css %}
+        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+    {% endblock %}
+    {% include 'block/header.html' with request=request %}
+    <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
+        <div class="row flex-grow-sm-1 flex-grow-0">
+            {% include 'block/navbar.html' %}
+            <main class="col overflow-auto h-100">
+                <div class="row">
+                    {% for unassigned_user in unassigned_users %}
+                        <div class="col-md-6 mb-4">
+
+                            <div class="card p-2 border border-success shadow h-100">
+
+                                <div class=" p-2 d-flex align-items-center">
+
+                                    <div class="image">
+                                        <img src="{{ unassigned_user.image.url }}"
+                                             class="rounded" width="150" alt="Profile Photo">
+                                    </div>
+
+                                    <div class=" p-2 w-100">
+
+                                        <h4 class="mb-2 mt-0">{{ unassigned_user.short_name }}</h4>
+                                        <span>Дата регистрации: {{ unassigned_user.user.date_joined|date:'d.m.Y' }}</span>
+
+                                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="articles">Возраст</span>
+                                                <span class="number1">{{ unassigned_user.age }}</span>
+
+                                            </div>
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="followers">Пол</span>
+                                                <span class="number2">{{ unassigned_user.get_gender_display|slice:':1' }}</span>
+
+                                            </div>
+
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="rating">Rating</span>
+                                                <span class="number3">8.9</span>
+
+                                            </div>
+
+                                        </div>
+
+                                        {{ unassigned_user.id }}
+                                        <div class="button mt-2 d-flex flex-row justify-content-md-around">
+
+                                            <a href="{% url 'user:profile' unassigned_user.id %}"
+                                               class="btn btn-sm btn-outline-success shadow">
+                                                Профиль
+                                            </a>
+                                            <a href="{% url 'company:add-employee' unassigned_user.id %}"
+                                               class="btn btn-sm btn-outline-success shadow">
+                                                Нанять
+                                            </a>
+                                              <a href="{% url 'company:creat-employee' %}"
+                                               class="btn btn-sm btn-outline-success shadow">
+                                                беда
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </main>
+        </div>
+    </div>
+{% endblock %}

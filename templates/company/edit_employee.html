@@ -18,7 +18,7 @@
                             </h3>
                         </div>
                     </div>
-                    <form class="row g-3 needs-validation" action="{% url 'company:edit-employee' %}" method="post"
+                    <form class="row g-3 needs-validation" action="{% url 'company:edit-employee' user.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}

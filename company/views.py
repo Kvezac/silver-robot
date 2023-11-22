@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from company.forms import EmployeeForms
 from company.models import Employee
+from user.models import Profile
 
 
 def home(request):
@@ -13,7 +15,7 @@ def home(request):
     return render(request, 'company/index.html', context)
 
 
-# @login_required
+@login_required
 def main_employee(request):
     """
         The main page shows company statistics
@@ -71,15 +73,9 @@ def list_employee_all(request):
 def list_employee_id(request, level):
     nodes = Employee.objects.filter(level=level)
     title = f'Департамент уровень {level}'
-    # root_employee_id = current_employee.get_level()
-    # print(root_employee_id)
-    # nodes = Employee.objects.all()
-    # nodes = current_employee.get_descendant() #.filter(level__gte=root_employee_id)
     context = {
         'title': title,
         'nodes': nodes,
-        # 'current_employee': current_employee,
-        # 'root_employee_id': root_employee_id
     }
     return render(request, 'company/list_employee_id.html', context)
 

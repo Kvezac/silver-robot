@@ -18,7 +18,7 @@
                             </h3>
                         </div>
                     </div>
-                    <form class="row g-3 needs-validation" action="{% url 'user:edit-profile' %}" method="post"
+                    <form class="row g-3 needs-validation" action="{% url 'user:edit-profile' request.user.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="col-md-2 d-flex  flex-column align-items-center mt-4">

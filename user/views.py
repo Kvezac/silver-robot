@@ -66,8 +66,8 @@ def delete_user(request, user_id):
 
 
 @login_required
-def user_profile(request):
-    profile = request.user.profile
+def user_profile(request, pk):
+    profile = get_object_or_404(Profile, id=pk)
     title = f'Профиль: {profile.short_name()}'
     context = {
         'title': title,
@@ -76,18 +76,16 @@ def user_profile(request):
     try:
         employee = Employee.objects.get(name=profile.id)
     except Employee.DoesNotExist:
-        print("None")
         return render(request, 'user/profile.html', context)
 
     else:
-        print(employee.get_parent())
         context['employee'] = employee
         return render(request, 'user/profile.html', context)
 
 
-def edit_profile(request):
-    profile = request.user.profile
-    title = f'Страница редактирования: {profile.short_name()}'
+def edit_profile(request, pk):
+    profile = get_object_or_404(Profile, id=pk)
+    title = f'Редактирование: {profile.short_name()}'
     form = ProfileForm(instance=profile)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
