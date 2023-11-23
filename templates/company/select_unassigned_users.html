@@ -9,6 +9,9 @@
         <div class="row flex-grow-sm-1 flex-grow-0">
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
+                <h3>{{ title }}</h3>
+                <span>Участников:{{ count_unassigned_users }}</span>
+
                 <div class="row">
                     {% for unassigned_user in unassigned_users %}
                         <div class="col-md-6 mb-4">
@@ -98,7 +101,8 @@
                         {% endfor %}
                         {% if unassigned_users.has_next %}
                             <li class="page-item">
-                                <a class="page-link border-success shadow" href="?page={{ unassigned_users.next_page_number }}"
+                                <a class="page-link border-success shadow"
+                                   href="?page={{ unassigned_users.next_page_number }}"
                                    aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>

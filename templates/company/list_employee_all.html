@@ -9,6 +9,8 @@
         <div class="row flex-grow-sm-1 flex-grow-0">
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
+                <h3>{{ title }}</h3>
+                <span>Участников:{{ count_employees }}</span>
                 <div class="row">
                     {% for employee in employees %}
                         <div class="col-md-6 mb-4">

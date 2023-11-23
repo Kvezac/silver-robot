@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from company.forms import AddEmployeeForm
 from company.models import Employee
+from company.utils import creat_paginator
 from user.models import Profile
 
 
@@ -45,25 +46,13 @@ def main_employee(request):
 
 def list_employee_all(request):
     employees = Employee.objects.all()
-    page = request.GET.get('page')
-    result = 6
+    count_employees = len(employees)
     title = 'Все сотрудники'
-    paginator = Paginator(employees, result)
-    try:
-        employees = paginator.page(page)
-    except PageNotAnInteger:
-        page = 1
-        employees = paginator.page(page)
-    except EmptyPage:
-        page = paginator.num_pages
-        employees = paginator.page(page)
-    page = int(page)
-    left_index = page - 2 if page > 2 else 1
-    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
-    custom_range = range(left_index, right_index)
+    employees, paginator, custom_range = creat_paginator(request, employees)
 
     context = {
         'title': title,
+        'count_employees': count_employees,
         'employees': employees,
         'paginator': paginator,
         'custom_range': custom_range
@@ -73,29 +62,33 @@ def list_employee_all(request):
 
 def list_employee_id(request, level):
     nodes = Employee.objects.filter(level=level)
+    count_nodes = len(nodes)
     title = f'Департамент уровень {level + 1}'
-    page = request.GET.get('page')
-    result = 6
-    paginator = Paginator(nodes, result)
-    try:
-        nodes = paginator.page(page)
-    except PageNotAnInteger:
-        page = 1
-        nodes = paginator.page(page)
-    except EmptyPage:
-        page = paginator.num_pages
-        nodes = paginator.page(page)
-    page = int(page)
-    left_index = page - 2 if page > 2 else 1
-    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
-    custom_range = range(left_index, right_index)
+    nodes, paginator, custom_range = creat_paginator(request, nodes)
     context = {
         'title': title,
+        'count_nodes': count_nodes,
         'nodes': nodes,
         'paginator': paginator,
         'custom_range': custom_range
     }
     return render(request, 'company/list_employee_id.html', context)
+
+
+@login_required
+def select_unassigned_users(request):
+    unassigned_users = Profile.objects.filter(employee__isnull=True)
+    count_unassigned_users = len(unassigned_users)
+    title = 'Соискатели'
+    unassigned_users, paginator, custom_range = creat_paginator(request, unassigned_users)
+    context = {
+        'title': title,
+        'count_unassigned_users': count_unassigned_users,
+        'unassigned_users': unassigned_users,
+        'paginator': paginator,
+        'custom_range': custom_range
+    }
+    return render(request, 'company/select_unassigned_users.html', context)
 
 
 def edit_employee(request):
@@ -111,34 +104,6 @@ def edit_employee(request):
     else:
         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
     return render(request, 'company/edit_employee.html', {'form': form})
-
-
-@login_required
-def select_unassigned_users(request):
-    unassigned_users = Profile.objects.filter(employee__isnull=True)
-    title = 'Кандидаты'
-    page = request.GET.get('page')
-    result = 6
-    paginator = Paginator(unassigned_users, result)
-    try:
-        unassigned_users = paginator.page(page)
-    except PageNotAnInteger:
-        page = 1
-        unassigned_users = paginator.page(page)
-    except EmptyPage:
-        page = paginator.num_pages
-        unassigned_users = paginator.page(page)
-    page = int(page)
-    left_index = page - 2 if page > 2 else 1
-    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
-    custom_range = range(left_index, right_index)
-    context = {
-        'title': title,
-        'unassigned_users': unassigned_users,
-        'paginator': paginator,
-        'custom_range': custom_range
-    }
-    return render(request, 'company/select_unassigned_users.html', context)
 
 
 def search_results(request):

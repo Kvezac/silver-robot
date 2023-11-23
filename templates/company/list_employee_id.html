@@ -12,7 +12,7 @@
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
                 <h3>{{ title }}</h3>
-                <span>Участников:{{ nodes|length }}</span>
+                <span>Участников:{{ count_nodes }}</span>
                 <div class="row">
                     {% for node in nodes %}
                         <div class="col-md-6 mb-4">
@@ -95,11 +95,11 @@
                 </li>
             {% endif %}
             {% for i in custom_range %}
-                <li class="page-item {% if nodess.number == i %}active{% endif %}">
+                <li class="page-item {% if nodes.number == i %}active{% endif %}">
                     <a class="page-link border-success shadow" href="?page={{ i }}">{{ i }}</a>
                 </li>
             {% endfor %}
-            {% if employees.has_next %}
+            {% if nodes.has_next %}
                 <li class="page-item">
                     <a class="page-link border-success shadow" href="?page={{ nodes.next_page_number }}"
                        aria-label="Next">
