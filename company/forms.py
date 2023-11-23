@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import MinValueValidator
 
 from company.models import Employee, Position
+from user.models import Profile
 
 
 class AddEmployeeForm(forms.ModelForm):
@@ -12,3 +13,11 @@ class AddEmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ['parent', 'position', 'salary']
+
+
+class EmployeeForm(forms.ModelForm):
+    name = forms.ModelChoiceField(queryset=Profile.objects.filter(employee__isnull=True))
+
+    class Meta:
+        model = Employee
+        fields = ['name', 'position', 'hire_date', 'salary', 'parent']

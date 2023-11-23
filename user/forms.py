@@ -111,8 +111,8 @@ class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['phone'].validators.append(self.phone_regex)
-        self.fields['date_of_bth'].validators.append(MinValueValidator(date.today().year - 65))
-        self.fields['date_of_bth'].validators.append(MaxValueValidator(date.today().year - 18))
+        # self.fields['date_of_bth'].validators.append(MinValueValidator(date.today().year - 65))
+        # self.fields['date_of_bth'].validators.append(MaxValueValidator(date.today().year - 18))
 
         for field in self.fields:
             if field == 'date_of_bth':
@@ -127,5 +127,3 @@ class ProfileForm(forms.ModelForm):
                 print(self.fields[field].label)
                 raise forms.ValidationError(f"Поле {self.fields[field].label} не должно быть пустым")
 
-    def profile_is_completed(self):
-        pass

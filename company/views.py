@@ -46,7 +46,7 @@ def main_employee(request):
 def list_employee_all(request):
     employees = Employee.objects.all()
     page = request.GET.get('page')
-    result = 5
+    result = 6
     title = 'Все сотрудники'
     paginator = Paginator(employees, result)
     try:
@@ -72,34 +72,73 @@ def list_employee_all(request):
 
 
 def list_employee_id(request, level):
-    nodes = Employee.objects.filter(level=level).is_not_child()
-    title = f'Департамент уровень {level}'
+    nodes = Employee.objects.filter(level=level)
+    title = f'Департамент уровень {level + 1}'
+    page = request.GET.get('page')
+    result = 6
+    paginator = Paginator(nodes, result)
+    try:
+        nodes = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        nodes = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        nodes = paginator.page(page)
+    page = int(page)
+    left_index = page - 2 if page > 2 else 1
+    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
+    custom_range = range(left_index, right_index)
     context = {
         'title': title,
         'nodes': nodes,
+        'paginator': paginator,
+        'custom_range': custom_range
     }
     return render(request, 'company/list_employee_id.html', context)
 
 
-# def edit_employee(request):
-#     if request.method == 'POST':
-#         form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
-#         if form.is_valid():
-#             employee = form.save(commit=False)
-#             if employee.get_parent == request.user.profile.employee_set.all().first():
-#                 employee.save()
-#                 return redirect('user:profile')
-#             else:
-#                 return redirect('user:profile')
-#     else:
-#         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
-#     return render(request, 'company/edit_employee.html', {'form': form})
+def edit_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
+        if form.is_valid():
+            employee = form.save(commit=False)
+            if employee.get_parent == request.user.profile.employee_set.all().first():
+                employee.save()
+                return redirect('user:profile')
+            else:
+                return redirect('user:profile')
+    else:
+        form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
+    return render(request, 'company/edit_employee.html', {'form': form})
 
 
 @login_required
 def select_unassigned_users(request):
     unassigned_users = Profile.objects.filter(employee__isnull=True)
-    return render(request, 'company/select_unassigned_users.html', {'unassigned_users': unassigned_users})
+    title = 'Кандидаты'
+    page = request.GET.get('page')
+    result = 6
+    paginator = Paginator(unassigned_users, result)
+    try:
+        unassigned_users = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        unassigned_users = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        unassigned_users = paginator.page(page)
+    page = int(page)
+    left_index = page - 2 if page > 2 else 1
+    right_index = page + 3 if page < paginator.num_pages - 2 else paginator.num_pages + 1
+    custom_range = range(left_index, right_index)
+    context = {
+        'title': title,
+        'unassigned_users': unassigned_users,
+        'paginator': paginator,
+        'custom_range': custom_range
+    }
+    return render(request, 'company/select_unassigned_users.html', context)
 
 
 def search_results(request):
@@ -116,10 +155,20 @@ def add_employee(request, pk):
         form = AddEmployeeForm(request.POST)
         if form.is_valid():
             employee = form.save(commit=False)
-            employee.hire_date = date.today()  # Set the hire date automatically
+            employee.hire_date = date.today()
             employee.save()
             return redirect(
-                'company:main-employee')  # Replace 'employee_list' with your actual URL name for the employee list page
+                'company:main-employee')
     else:
         form = AddEmployeeForm()
     return render(request, 'company/add_employee.html', {'form': form})
+
+
+def delete_employee(request, pk):
+    parent = Employee.objects.get(id=pk)
+    for child in parent.get_children():
+        print(child)
+        child.parent = parent.parent
+        child.save()
+    parent.delete()
+    return redirect('company:main_employee')

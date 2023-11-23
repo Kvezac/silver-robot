@@ -46,14 +46,12 @@
 
                                             <div class="d-flex flex-column">
 
-                                                <span class="rating">Rating</span>
-                                                <span class="number3">8.9</span>
+                                                <span class="rating">ID</span>
+                                                <span class="number3">{{ unassigned_user.id }}</span>
 
                                             </div>
 
                                         </div>
-
-                                        {{ unassigned_user.id }}
                                         <div class="button mt-2 d-flex flex-row justify-content-md-around">
 
                                             <a href="{% url 'user:profile' unassigned_user.id %}"
@@ -77,7 +75,44 @@
                         </div>
                     {% endfor %}
                 </div>
-
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if unassigned_users.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link border-success shadow" href="?page=1" aria-label="First">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-success shadow"
+                                   href="?page={{ unassigned_users.previous_page_number }}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for i in custom_range %}
+                            <li class="page-item {% if unassigned_users.number == i %}active{% endif %}">
+                                <a class="page-link border-success shadow" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if unassigned_users.has_next %}
+                            <li class="page-item">
+                                <a class="page-link border-success shadow" href="?page={{ unassigned_users.next_page_number }}"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-success shadow"
+                                   href="?page={{ unassigned_users.paginator.num_pages }}"
+                                   aria-label="Last">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </main>
         </div>
     </div>

@@ -3,42 +3,120 @@
 {% load mptt_tags %}
 
 {% block content %}
-        {% include 'block/header.html' with request=request %}
+        {% block css %}
+        <link href="{% static 'company/css/employee.css' %}" type="text/css" rel="stylesheet">
+    {% endblock %}
+    {% include 'block/header.html' with request=request %}
     <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column overflow-auto">
         <div class="row flex-grow-sm-1 flex-grow-0">
             {% include 'block/navbar.html' %}
             <main class="col overflow-auto h-100">
-    <h3>Сотрудники</h3>
-    <ul>
-        {% recursetree nodes %}
-            <li class="table table-success table-striped">
-                <a class="btn btn__dark" href="{% url 'company:list-employee-id' node.level %}">
-                    {{ node.name.full_name }}
-                    {{ node.position }}
-                    {{ node.salary }}
-                </a>
-                {% if node.is_root_node %}
-                        {% if not node.is_leaf_node %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                    {% endif %}
-                {% else %}
-                    {% if not node.is_leaf_node %}
-                        {% if current_employee.id == node.id %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% elif node.level < current_employee.level %}
-                            <ul class="children">
-                                {{ children }}
-                            </ul>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            </li>
-        {% endrecursetree %}
-    </ul>
+                <h3>{{ title }}</h3>
+                <span>Участников:{{ nodes|length }}</span>
+                <div class="row">
+                    {% for node in nodes %}
+                        <div class="col-md-6 mb-4">
+
+                            <div class="card p-2 border border-success shadow h-100">
+
+                                <div class=" p-2 d-flex align-items-center">
+
+                                    <div class="image">
+                                        <img src="{{ node.name.image.url }}"
+                                             class="rounded" width="150" alt="Profile Photo">
+                                    </div>
+
+                                    <div class=" p-2 w-100">
+
+                                        <h4 class="mb-2 mt-0">{{ node.short_name }}</h4>
+                                        <span>Дата регистрации: {{ node.user.date_joined|date:'d.m.Y' }}</span>
+
+                                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="articles">Возраст</span>
+                                                <span class="number1">{{ node.age }}</span>
+
+                                            </div>
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="followers">Пол</span>
+                                                <span class="number2">{{ node.get_gender_display|slice:':1' }}</span>
+
+                                            </div>
+
+
+                                            <div class="d-flex flex-column">
+
+                                                <span class="rating">Уровень</span>
+                                                <span class="number3">{{ node.level }}</span>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="button mt-2 d-flex flex-row justify-content-md-around">
+
+                                            <a href="{% url 'user:profile' node.id %}"
+                                               class="btn btn-sm btn-outline-success shadow">
+                                                Профиль
+                                            </a>
+                                            <a href="{% url 'company:add-employee' node.id %}"
+                                               class="btn btn-sm btn-outline-success shadow">
+                                                Нанять
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if nodes.has_previous %}
+                <li class="page-item">
+                    <a class="page-link border-success shadow" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link border-success shadow" href="?page={{ nodes.previous_page_number }}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% for i in custom_range %}
+                <li class="page-item {% if nodess.number == i %}active{% endif %}">
+                    <a class="page-link border-success shadow" href="?page={{ i }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+            {% if employees.has_next %}
+                <li class="page-item">
+                    <a class="page-link border-success shadow" href="?page={{ nodes.next_page_number }}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link border-success shadow" href="?page={{ nodes.paginator.num_pages }}"
+                       aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
             </main>
         </div>
     </div>
