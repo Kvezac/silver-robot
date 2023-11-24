@@ -9,12 +9,8 @@ urlpatterns = [
     path('delete-employee<pk>', views.delete_employee, name='delete-employee'),
     path('main-employee/', views.main_employee, name='main-employee'),
     path('list-employee-all/', views.list_employee_all, name='list-employee-all'),
-    # path('edit-employee/', views.edit_employee, name='edit-employee'),
+    path('edit-employee/<pk>', views.edit_employee, name='edit-employee'),
     path('search-results/', views.search_results, name='search-results'),
     path('unassigned-users/', views.select_unassigned_users, name='unassigned-users'),
     path('', views.home, name='home'),
-
-
-    # path('add-employee', views.add_employee, name='add-employee')
-
 ]

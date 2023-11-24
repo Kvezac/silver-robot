@@ -60,9 +60,6 @@
                                                class="btn btn-sm btn-outline-success shadow">
                                                 Профиль
                                             </a>
-{% if request.user.profile.employee_set.is_root_node %}
-                                            cool
-                                            {% endif %}
                                             c: {{ employee.get_parent.id }}
                                             {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
                                                 <a class="btn btn-outline-danger btn-sm"

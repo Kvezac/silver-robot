@@ -91,26 +91,30 @@ def select_unassigned_users(request):
     return render(request, 'company/select_unassigned_users.html', context)
 
 
-# def edit_employee(request):
-#     if request.method == 'POST':
-#         form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
-#         if form.is_valid():
-#             employee = form.save(commit=False)
-#             if employee.get_parent == request.user.profile.employee_set.all().first():
-#                 employee.save()
-#                 return redirect('user:profile')
-#             else:
-#                 return redirect('user:profile')
-#     else:
-#         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
-#     return render(request, 'company/edit_employee.html', {'form': form})
+def edit_employee(request, pk):
+    employee = get_object_or_404(Profile, id=pk)
+    title = f'Профиль: {employee}'
+    context = {
+        'title': title,
+        'employee': employee,
+    }
+
+    if request.method == 'POST':
+        form = AddEmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            employee = form.save(commit=False)
+            if employee.get_parent == request.user.profile.employee_set.all().first():
+                employee.save()
+                return redirect('user:profile')
+            else:
+                return redirect('user:profile')
+    else:
+        form = AddEmployeeForm(instance=request.user.profile.employee_set.all().first())
+    context['form'] = form
+    return render(request, 'company/edit_employee.html', context)
 
 
 def search_results(request):
-    return None
-
-
-def change_boss(request):
     return None
 
 
