@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('position', type=int, nargs='?', default=20,
                             help='Количество создаваемых должностей')
-        parser.add_argument('total_employee', type=int, nargs='?', default=500,
+        parser.add_argument('total_employee', type=int, nargs='?', default=50,
                             help='Количество создаваемых сотрудников')
 
     @clock
@@ -38,3 +38,5 @@ class Command(BaseCommand):
         for level, i in enumerate(all_employees, 0):
             for j in range(i[0]):
                 creat_employee(level, i[1])
+
+
