@@ -37,11 +37,11 @@
                         {% csrf_token %}
                         <div class="col">
                             <h3>Вы уверены, что хотите удалить
-                                <strrong>{{ user.short_name }}?</strrong>
+                                <strong>{{ user }}?</strong>
                             </h3>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-danger btn-sm">
+                            <button type="submit" id="name" name="name" class="btn btn-danger btn-sm">
                                 Удалить
                             </button>
                         </div>

@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
 from django.shortcuts import render, get_object_or_404, redirect
+from mptt.exceptions import InvalidMove
 
 from company.forms import AddEmployeeForm
 from company.models import Employee
@@ -141,7 +142,11 @@ def add_employee(request, pk):
 def delete_employee(request, pk):
     user = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
-        print(user)
+        for child in user.get_children():
+            try:
+                child.parent = user.parent
+            except InvalidMove:
+                user.delete()
         user.delete()
         return redirect('company:main-employee')
     return render(request, 'block/delete_employee.html', {'user': user})

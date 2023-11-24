@@ -136,3 +136,6 @@ MEDIA_ROOT = BASE_DIR / MEDIA_URL
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login'
+
+
+MPTT_ADMIN_LEVEL_INDENT = 20

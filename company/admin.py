@@ -16,3 +16,5 @@ class EmployeeAdmin(DjangoMpttAdmin):
     list_display = ('name', 'position', 'hire_date', 'salary', 'parent')
     readonly_fields = ("hire_date",)
     list_per_page = 10
+    mptt_level_indent = 20
+
