@@ -49,7 +49,7 @@
                                     {% if employee %}
                                         {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
                                             <a class="btn btn-success btn-sm"
-                                               href="{% url 'company:edit-employee' employee.id %}">
+                                               href="{% url 'company:add-employee' employee.id %}">
                                                 Редактировать данные
                                             </a>
                                         {% else %}

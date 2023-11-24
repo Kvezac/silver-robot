@@ -3,7 +3,6 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from company.forms import AddEmployeeForm
 from company.models import Employee
@@ -91,19 +90,19 @@ def select_unassigned_users(request):
     return render(request, 'company/select_unassigned_users.html', context)
 
 
-def edit_employee(request):
-    if request.method == 'POST':
-        form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
-        if form.is_valid():
-            employee = form.save(commit=False)
-            if employee.get_parent == request.user.profile.employee_set.all().first():
-                employee.save()
-                return redirect('user:profile')
-            else:
-                return redirect('user:profile')
-    else:
-        form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
-    return render(request, 'company/edit_employee.html', {'form': form})
+# def edit_employee(request):
+#     if request.method == 'POST':
+#         form = EmployeeForms(request.POST, instance=request.user.profile.employee_set.all().first())
+#         if form.is_valid():
+#             employee = form.save(commit=False)
+#             if employee.get_parent == request.user.profile.employee_set.all().first():
+#                 employee.save()
+#                 return redirect('user:profile')
+#             else:
+#                 return redirect('user:profile')
+#     else:
+#         form = EmployeeForms(instance=request.user.profile.employee_set.all().first())
+#     return render(request, 'company/edit_employee.html', {'form': form})
 
 
 def search_results(request):
@@ -116,24 +115,33 @@ def change_boss(request):
 
 @login_required
 def add_employee(request, pk):
+    profile = get_object_or_404(Profile, id=pk)
+    title = f'Профиль: {profile}'
+    context = {
+        'title': title,
+        'profile': profile,
+    }
+    employee, created = Employee.objects.get_or_create(name=profile)
+    print(employee, created)
     if request.method == 'POST':
-        form = AddEmployeeForm(request.POST)
+        form = AddEmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             employee = form.save(commit=False)
             employee.hire_date = date.today()
             employee.save()
+            print('employee add')
             return redirect(
                 'company:main-employee')
     else:
         form = AddEmployeeForm()
-    return render(request, 'company/add_employee.html', {'form': form})
+    context['form'] = form
+    return render(request, 'company/add_employee.html', context)
 
 
 def delete_employee(request, pk):
-    parent = Employee.objects.get(id=pk)
-    for child in parent.get_children():
-        print(child)
-        child.parent = parent.parent
-        child.save()
-    parent.delete()
-    return redirect('company:main_employee')
+    user = get_object_or_404(Employee, pk=pk)
+    if request.method == 'POST':
+        print(user)
+        user.delete()
+        return redirect('company:main-employee')
+    return render(request, 'block/delete_employee.html', {'user': user})

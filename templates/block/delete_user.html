@@ -1,8 +1,53 @@
-{{ request.user }}
+{#{{ request.user.profile }}#}
+{##}
+{#<form method="post" action="{% url 'user:delete_user' user.id %}">#}
+{#    {% csrf_token %}#}
+{#    <p>A вы уверены, что хотите удалить {{ user.short_name }}?</p>#}
+{#    <button type="submit" class="btn btn-danger btn-sm">#}
+{#        Удалить#}
+{#    </button>#}
+{#</form>#}
 
-<form method="post" action="{% url 'user:delete_user' user.id %}">
-    {% csrf_token %}
-{#    <p>Are you sure you want to delete {{ user.name }}?</p>#}
-    <button type="button" class="btn btn-danger">Удалить</button>
-</form>
-<td>
+
+{{% extends 'base/base.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'company/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 mx-auto">
+                <div class="card  shadow p-3 mb-5 bg-body  rounded border border-success" style="max-width:1400px;">
+                    <div class="row card-header mb-5 align-items-center border-success shadow">
+                        <div class="col-md-4">
+                            <a class="btn" href="javascript:history.go(-1)"><img
+                                    src="{% static 'company/svg/back-arrow.svg' %}" width="35" height="30"
+                                    alt="Назад"></a>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="font-weight-light my-3">
+                                Удалить
+                            </h3>
+                        </div>
+                    </div>
+                    <form class="row g-3 needs-validation" action="{% url 'user:delete_user' user.id %}"
+                          method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col">
+                            <h3>Вы уверены, что хотите удалить
+                                <strrong>{{ user.short_name }}?</strrong>
+                            </h3>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Удалить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

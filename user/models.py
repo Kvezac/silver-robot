@@ -21,8 +21,8 @@ class Profile(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True, verbose_name='Место Проживания')
 
     class Meta:
-        verbose_name = 'Сотрудник'
-        verbose_name_plural = 'Сотрудники'
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
 
     def __str__(self) -> str:
         return f'{self.last_name}'

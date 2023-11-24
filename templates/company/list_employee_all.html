@@ -56,14 +56,23 @@
                                         </div>
                                         <div class="button mt-2 d-flex flex-row justify-content-md-around">
 
-                                            <a href="{% url 'user:profile' employee.id %}"
+                                            <a href="{% url 'user:profile' employee.name.id %}"
                                                class="btn btn-sm btn-outline-success shadow">
                                                 Профиль
                                             </a>
-                                            <a href="{% url 'company:add-employee' employee.id %}"
-                                               class="btn btn-sm btn-outline-success shadow">
-                                                Нанять
-                                            </a>
+
+                                            {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
+                                                <a class="btn btn-outline-danger btn-sm"
+                                                   href="{% url 'company:delete-employee' employee.id %}">
+                                                    Удалить
+                                                </a>
+                                            {% else %}
+                                                <a class="btn btn-danger btn-sm disabled"
+                                                   aria-roledescription="disable"
+                                                   href="#">
+                                                    Удалить
+                                                </a>
+                                            {% endif %}
                                         </div>
 
 

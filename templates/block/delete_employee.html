@@ -1,4 +1,15 @@
-{% extends 'base/base.html' %}
+{#{{ request.user.profile }}#}
+{##}
+{#<form method="post" action="{% url 'user:delete_user' user.id %}">#}
+{#    {% csrf_token %}#}
+{#    <p>A вы уверены, что хотите удалить {{ user.short_name }}?</p>#}
+{#    <button type="submit" class="btn btn-danger btn-sm">#}
+{#        Удалить#}
+{#    </button>#}
+{#</form>#}
+
+
+{{% extends 'base/base.html' %}
 {% load static %}
 {% block css %}
     <link href="{% static 'company/css/index.css' %}" rel="stylesheet">
@@ -16,33 +27,22 @@
                         </div>
                         <div class="col-md-4">
                             <h3 class="font-weight-light my-3">
-                                {{ profile }}
+                                Удалить
                             </h3>
                         </div>
                     </div>
-                    <form class="row g-3 needs-validation" action="{% url 'company:add-employee' profile.pk %}"
+                    <form class="row g-3 needs-validation" action="{% url 'company:delete-employee' user.id %}"
                           method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="col-md-6">
-                            <label for="ProfileName" class="form-label">{{ form.parent.label }}</label>
-                            <p>{{ form.parent }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPosition" class="form-label">{{ form.position.label }}</label>
-                            <p>{{ form.position }}</p>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="inputSalary" class="form-label">{{ form.salary.label }}</label>
-                            <p>{{ form.salary }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputHireDate" class="form-label">{{ form.hire_date.label }}</label>
-                            <p>{{ form.hire_date }}</p>
+                        <div class="col">
+                            <h3>Вы уверены, что хотите удалить
+                                <strrong>{{ user.short_name }}?</strrong>
+                            </h3>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success btn-sm mr-auto shadow">Сохранить изменения
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Удалить
                             </button>
                         </div>
                     </form>

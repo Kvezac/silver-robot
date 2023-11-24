@@ -61,8 +61,9 @@ def logout_user(request):
 def delete_user(request, user_id):
     user = get_object_or_404(Profile, pk=user_id)
     if request.method == 'POST':
+        print(user)
         user.delete()
-        return redirect('company:home')
+        return redirect('company:main-employee')
     return render(request, 'block/delete_user.html', {'user': user})
 
 

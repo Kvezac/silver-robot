@@ -1,23 +1,18 @@
 from django import forms
-from django.core.validators import MinValueValidator
 
-from company.models import Employee, Position
-from user.models import Profile
+from company.models import Employee
 
 
 class AddEmployeeForm(forms.ModelForm):
-    parent = forms.ModelChoiceField(queryset=Employee.objects.all(), label='Начальник')
-    position = forms.ModelChoiceField(queryset=Position.objects.all(), label='Position')
-    salary = forms.DecimalField(label='Salary', validators=[MinValueValidator(0)])
+    class Media:
+        css = {
+            'form-control': 'form-control',
+        }
 
     class Meta:
         model = Employee
-        fields = ['parent', 'position', 'salary']
+        fields = ['parent', 'position', 'salary', 'hire_date']
 
-
-class EmployeeForm(forms.ModelForm):
-    name = forms.ModelChoiceField(queryset=Profile.objects.filter(employee__isnull=True))
-
-    class Meta:
-        model = Employee
-        fields = ['name', 'position', 'hire_date', 'salary', 'parent']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['hire_date'].widget.attrs['readonly'] = True

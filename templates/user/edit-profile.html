@@ -1,8 +1,11 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block css %}
+    <link href="{% static 'company/css/index.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <div class="container  mt-4 p-4 alert">
+    <div class="container">
         <div class="row">
             <div class="col-xl-12 mt-5">
                 <div class="card  shadow p-3 mb-5 bg-body  rounded border-success" style="max-width:1400px;">
@@ -18,7 +21,8 @@
                             </h3>
                         </div>
                     </div>
-                    <form class="row g-3 needs-validation" action="{% url 'user:edit-profile' request.user.id %}" method="post"
+                    <form class="row g-3 needs-validation" action="{% url 'user:edit-profile' request.user.id %}"
+                          method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="col-md-2 d-flex  flex-column align-items-center mt-4">
@@ -33,7 +37,8 @@
                         <div class="col-md-10 d-flex flex-column">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="validationCustom02" class="form-label">{{ form.last_name.label }}</label>
+                                    <label for="validationCustom02"
+                                           class="form-label">{{ form.last_name.label }}</label>
                                     <p type="text" id="validationCustom02">{{ form.last_name }}</p>
                                 </div>
                                 <div class="col-md-4">
@@ -41,9 +46,9 @@
                                     <p type="text" id="validationCustom01">{{ form.name }}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="validationCustom01"
+                                    <label for="validationCustom03"
                                            class="form-label">{{ form.middle_name.label }}</label>
-                                    <p type="text" id="validationCustom01">{{ form.middle_name }}</p>
+                                    <p type="text" id="validationCustom03">{{ form.middle_name }}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="male2" class="form-label">{{ form.gender.label }}</label>

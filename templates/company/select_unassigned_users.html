@@ -61,10 +61,30 @@
                                                class="btn btn-sm btn-outline-success shadow">
                                                 Профиль
                                             </a>
+                                        {% if request.user.profile.employee_set.first %}
                                             <a href="{% url 'company:add-employee' unassigned_user.id %}"
                                                class="btn btn-sm btn-outline-success shadow">
                                                 Нанять
                                             </a>
+{% else %}
+                                                <a class="btn btn-outline-success btn-sm disabled"
+                                                   aria-roledescription="disable"
+                                                   href="#">
+                                                    Нанять
+                                                </a>
+                                            {% endif %}
+                                            {% if request.user.profile.employee_set.first %}
+                                                <a class="btn btn-outline-danger btn-sm"
+                                                   href="{% url 'user:delete_user' unassigned_user.id %}">
+                                                    Удалить
+                                                </a>
+                                            {% else %}
+                                                <a class="btn btn-danger btn-sm disabled"
+                                                   aria-roledescription="disable"
+                                                   href="#">
+                                                    Удалить
+                                                </a>
+                                            {% endif %}
                                         </div>
 
 

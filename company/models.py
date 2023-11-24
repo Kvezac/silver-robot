@@ -3,6 +3,7 @@ from datetime import date, datetime
 from django.core.validators import MinValueValidator
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+
 from user.models import Profile
 
 
@@ -27,11 +28,13 @@ class Employee(MPTTModel):
         The Employee model represents employees in a company.
     """
 
-    name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    position = models.ForeignKey('Position', on_delete=models.PROTECT, null=True, blank=True)
-    hire_date = models.DateField(default=datetime.now, blank=True)
-    salary = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Имя сотрудника')
+    position = models.ForeignKey('Position', on_delete=models.PROTECT, null=True, blank=True, verbose_name='Должность')
+    hire_date = models.DateField(default=datetime.now, blank=True, verbose_name='Дата принятия на работу')
+    salary = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
+                                 validators=[MinValueValidator(0)], verbose_name='Назначенная зарплата')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',
+                            verbose_name='Руководитель')
 
     class MPTTMeta:
         order_insertion_by = ['name']
