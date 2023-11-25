@@ -29,7 +29,16 @@
                                     <div class=" p-2 w-100">
 
                                         <h4 class="mb-2 mt-0">{{ node.name.short_name }}</h4>
-                                        <span>Дата регистрации: {{ node.user.date_joined|date:'d.m.Y' }}</span>
+                                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                                            <div class="d-flex flex-column">
+                                                <span class="experience">Стаж</span>
+                                                <span class="number1">{{ node.hire_date|date:'d.m.Y' }}</span>
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <span class="profession">Профессия:</span>
+                                                <span class="number1">{{ node.position }}</span>
+                                            </div>
+                                        </div>
 
                                         <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
 

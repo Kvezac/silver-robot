@@ -1,7 +1,7 @@
 {% load static %}
 {% load department_menu %}
 
-<nav class="col-sm-2  d-flex flex-column">
+<nav class="col-sm-2  d-flex flex-column text-truncate">
     <div class="bg-white border shadow border-success rounded-3 p-1 min-vh-100 sticky-top h-100">
         <ul class="nav flex-column  flex-row mb-auto justify-content-between overflow-auto">
             <li class="nav-item">
@@ -12,22 +12,22 @@
             </li>
             <li class="nav-item">
                 <a href="{% url 'company:list-employee-all' %}" class="nav-link px-2 text-truncate">
-                    <i class="bi bi-house fs-5"></i>
-                    <span class="d-none d-sm-inline text-dark">Все сотрудники</span>
+                    {#                    <i class="bi bi-house fs-5"></i>#}
+                    <span class="d-none d-sm-inline text-dark">Сотрудники</span>
                 </a>
             </li>
             <li>
                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                    <i class="fs-4 bi-speedometer2"></i> <span
-                        class="ms-1 d-none d-sm-inline text-dark">Подразделения</span> </a>
+                    {#                    <i class="fs-4 bi-speedometer2"></i> #}
+                    <span class="ms-1 d-none d-sm-inline text-dark">Подразделения</span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                     {% departament_menu %}
                 </ul>
             </li>
             <li>
                 <a href="{% url 'company:unassigned-users' %}" class="nav-link px-2 text-truncate">
-                    <i class="bi bi-house fs-5"></i>
-                    <span class="d-none d-sm-inline text-dark">Кандидаты</span>
+                    {#                    <i class="bi bi-house fs-5"></i>#}
+                    <span class="d-none d-sm-inline text-dark">Соискатели</span>
                 </a>
             </li>
         </ul>

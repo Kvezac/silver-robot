@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from mptt.exceptions import InvalidMove
 
 from company.forms import AddEmployeeForm
-from company.models import Employee, Position
+from company.models import Employee
 from company.utils import creat_paginator
 from user.models import Profile
 
@@ -27,21 +27,36 @@ def main_employee(request):
     levels = Employee.objects.all().count()
     managers = Employee.objects.exclude(parent=True).count()
     avg_subordinates = Employee.objects.aggregate(avg=Avg('children'))['avg']  # что-то не так
+    unassigned_users = Profile.objects.filter(employee__isnull=True).count()
+
     stats = Employee.objects.aggregate(min_salary=Min('salary'), max_salary=Max('salary'), sum_salary=Sum('salary'),
                                        avg_salary=Avg('salary'))
     min_hire_date = Employee.objects.exclude(hire_date=None).aggregate(min=Min('hire_date'))['min']
     max_hire_date = Employee.objects.exclude(hire_date=None).aggregate(max=Max('hire_date'))['max']
+
     longest_employment = Employee.objects.filter(hire_date=min_hire_date).first()
     shortest_employment = Employee.objects.filter(hire_date=max_hire_date).first()
+
+    from django.db.models import Count
+
+    most_common_position = Employee.objects.values('position__name').annotate(count=Count('position')).order_by(
+        '-count').first()
+    least_common_position = Employee.objects.values('position__name').annotate(count=Count('position')).order_by(
+        'count').first()
+
     context = {'title': title,
                'levels': levels,
                'managers': managers,
                'avg_subordinates': avg_subordinates,
+               'unassigned_users': unassigned_users,
                'stats': stats,
                'longest_employment': longest_employment,
                'shortest_employment': shortest_employment,
+               'least_common_position': least_common_position,
+               'most_common_position': most_common_position,
 
                }
+
     return render(request, 'company/main_employee.html', context=context)
 
 
@@ -120,7 +135,7 @@ def search_results(request):
     search_query = request.GET.get('search_query') if request.GET.get('search_query') else ''
     employees = Employee.objects.distinct().filter(
         Q(name__user__last_name__istartswith=search_query[:1].upper()) |
-        Q(name__last_name__icontains=search_query))    #.order_by('-name__last_name')
+        Q(name__last_name__icontains=search_query))  # .order_by('-name__last_name')
     print(employees)
     count_employees = len(employees)
     context = {'employees': employees,

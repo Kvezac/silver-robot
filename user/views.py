@@ -25,7 +25,7 @@ def login_user(request):
             if user is not None:
                 print(user)
                 login(request, user)
-                return redirect('user:edit-profile', user.id)
+                return redirect('user:profile', user.id)
 
         return render(request, 'user/login.html', context)
 

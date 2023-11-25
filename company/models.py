@@ -16,6 +16,7 @@ class Position(models.Model):
     date_create = models.DateField(auto_now_add=True)
 
     class Meta:
+        ordering = ['name']
         verbose_name = 'Профессия'
         verbose_name_plural = 'Профессии'
 

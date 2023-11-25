@@ -16,7 +16,7 @@
                         <div class="card shadow h-100">
                             <div class="card-header">
                                 <h3 class="text-center font-weight-light my-3">
-                                    Статистика по сотрудникам
+                                    Анализ сотрудников
                                 </h3>
                             </div>
                             <div class="card-body">
@@ -25,6 +25,8 @@
                                 </p>
                                 <p class="card-text mb-2 font-13"><strong>Среднее количество
                                     подчиненных:</strong> {{ avg_subordinates }}</p>
+                                <p class="card-text mb-2 font-13"><strong>Соискателей:</strong> {{ unassigned_users }}
+                                </p>
                                 <div class="card-footer bg-transparent border-success text-center">
                                     <div class="large ">
                                         {#                                    <a href="#" class="btn btn-primary">Go somewhere</a>#}
@@ -37,11 +39,11 @@
                         <div class="card shadow h-100">
                             <div class="card-header">
                                 <h3 class="text-center font-weight-light my-3">
-                                    Статистика по оплате
+                                    Анализ финансов
                                 </h3>
                             </div>
                             <div class="card-body">
-{#                                <h5 class="card-title">Статистика по оплате</h5>#}
+                                {#                                <h5 class="card-title">Статистика по оплате</h5>#}
                                 <p class="card-text mb-2 font-13"><strong>Общая сумма
                                     зарплат:</strong> {{ stats.sum_salary|floatformat:2 }}&#8381;</p>
                                 <p class="card-text mb-2 font-13"><strong>Средняя
@@ -51,7 +53,6 @@
                                 <p class="card-text mb-2 font-13"><strong>Минимальная
                                     зарплата:</strong> {{ stats.min_salary|floatformat:2 }}&#8381;</p>
                                 <div class="card-footer bg-transparent border-success text-center">
-                                                                        <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -60,22 +61,20 @@
                         <div class="card shadow h-100">
                             <div class="card-header">
                                 <h3 class="text-center font-weight-light my-3">
-                                    Статистика по количеству отработанных лет
+                                    Анализ трудового стажа
                                 </h3>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Статистика по количеству отработанных лет</h5>
                                 <p class="card-text mb-2 font-13"><strong>Самый большой стаж в
                                     компании:</strong> {{ longest_employment.age }} лет</p>
                                 <p class="card-text mb-2 font-13"><strong>Самый маленький стаж в компании:</strong>
                                     {% if shortest_employment.age %}
                                         {{ longest_employment.age }} лет
                                     {% else %}
-                                        Работает менее года
+                                        менее года
                                     {% endif %}
                                 </p>
                                 <div class="card-footer bg-transparent border-success text-center">
-                                    {#                                    <a href="#" class="btn btn-primary">Go somewhere</a>#}
                                 </div>
                             </div>
                         </div>
@@ -83,14 +82,19 @@
                     <div class="col-md-6 mb-4">
                         <div class="card shadow h-100">
                             <div class="card-header">
-                                Featured 4
+                                <h3 class="text-center font-weight-light my-3">
+                                    Анализ позиций
+                                </h3>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text mb-2 font-13"><strong> {{ longest_employment.age }}</strong></p>
+                                <p class="card-text mb-2 font-13"><strong>Часто встречаемая
+                                    позиция:</strong> {{ most_common_position.position__name }}
+                                    {{ most_common_position.count }} раз</p>
+                                <p class="card-text mb-2 font-13"><strong>Редко встречаемая
+                                    позиция:</strong> {{ least_common_position.position__name }}
+                                    {{ least_common_position.count }} раз</p>
                             </div>
                             <div class="card-footer bg-transparent border-success text-center">
-                                {#                                <a href="#" class="btn btn-primary">Go somewhere</a>#}
                             </div>
                         </div>
                     </div>
