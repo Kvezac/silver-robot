@@ -7,11 +7,12 @@
         </div>
         <div class="flex-grow-1 d-flex align-items-center justify-content-between">
             <form action="{% url 'company:search-results' %}" method="get" class="form-inline my-2 my-lg-0">
-                <input name="q" type="text" class="form-control mr-sm-2 border-success shadow" placeholder="Поиск..." aria-label="Поиск">
-                {#                <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>#}
+                <input name="search_query" type="text" class="input form-control mr-sm-2 border-success shadow"
+                       value="{{ request.search_query }}" placeholder="Поиск..." aria-label="Поиск">
             </form>
             <div class="flex-shrink-0 dropdown">
-                <a href="{% url 'user:profile' request.user.id  %}" class="d-block link-dark text-decoration-none dropdown-toggle"
+                <a href="{% url 'user:profile' request.user.id %}"
+                   class="d-block link-dark text-decoration-none dropdown-toggle"
                    id="dropdownUser2"
                    data-bs-toggle="dropdown" aria-expanded="false">
                     {{ request.user.profile.short_name }}
@@ -20,7 +21,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end border-success shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="{% url 'user:edit-profile' request.user.id %}">Настройка</a></li>
-                    <li><a class="dropdown-item" href="{% url 'user:profile' request.user.id%}">Профиль</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user:profile' request.user.id %}">Профиль</a></li>
                     <li class="border-success">
                         <hr class="dropdown-divider">
                     </li>

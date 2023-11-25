@@ -27,7 +27,16 @@
                                     <div class=" p-2 w-100">
 
                                         <h4 class="mb-2 mt-0">{{ employee.name.short_name }}</h4>
-                                        <span>Стаж с: {{ employee.hire_date|date:'d.m.Y' }}</span>
+                                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                                            <div class="d-flex flex-column">
+                                                <span class="experience">Стаж</span>
+                                                <span class="number1">{{ employee.hire_date|date:'d.m.Y' }}</span>
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <span class="profession">Профессия:</span>
+                                                <span class="number1">{{ employee.position }}</span>
+                                            </div>
+                                        </div>
 
                                         <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
 
@@ -41,7 +50,7 @@
                                             <div class="d-flex flex-column">
 
                                                 <span class="followers">Пол</span>
-                                                <span class="number2">{{ employee.name.get_gender_display|slice:':1' }}</span>
+                                                <span class="number1">{{ employee.name.get_gender_display|slice:':1' }}</span>
 
                                             </div>
 
@@ -49,7 +58,7 @@
                                             <div class="d-flex flex-column">
 
                                                 <span class="rating">ID</span>
-                                                <span class="number3">{{ employee.id }}</span>
+                                                <span class="number1">{{ employee.id }}</span>
 
                                             </div>
 
@@ -60,7 +69,6 @@
                                                class="btn btn-sm btn-outline-success shadow">
                                                 Профиль
                                             </a>
-                                            c: {{ employee.get_parent.id }}
                                             {% if employee.get_parent.id == request.user.profile.employee_set.first.id %}
                                                 <a class="btn btn-outline-danger btn-sm"
                                                    href="{% url 'company:delete-employee' employee.id %}">

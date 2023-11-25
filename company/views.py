@@ -2,11 +2,12 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from mptt.exceptions import InvalidMove
 
 from company.forms import AddEmployeeForm
-from company.models import Employee
+from company.models import Employee, Position
 from company.utils import creat_paginator
 from user.models import Profile
 
@@ -45,7 +46,7 @@ def main_employee(request):
 
 
 def list_employee_all(request):
-    employees = Employee.objects.all()
+    employees = Employee.objects.order_by('id')
     count_employees = len(employees)
     title = 'Все сотрудники'
     employees, paginator, custom_range = creat_paginator(request, employees)
@@ -61,7 +62,7 @@ def list_employee_all(request):
 
 
 def list_employee_id(request, level):
-    nodes = Employee.objects.filter(level=level)
+    nodes = Employee.objects.filter(level=level).order_by('id')
     count_nodes = len(nodes)
     title = f'Департамент уровень {level + 1}'
     nodes, paginator, custom_range = creat_paginator(request, nodes)
@@ -91,6 +92,7 @@ def select_unassigned_users(request):
     return render(request, 'company/select_unassigned_users.html', context)
 
 
+@login_required
 def edit_employee(request, pk):
     employee = get_object_or_404(Profile, id=pk)
     title = f'Профиль: {employee}'
@@ -115,7 +117,16 @@ def edit_employee(request, pk):
 
 
 def search_results(request):
-    return None
+    search_query = request.GET.get('search_query') if request.GET.get('search_query') else ''
+    employees = Employee.objects.distinct().filter(
+        Q(name__user__last_name__istartswith=search_query[:1].upper()) |
+        Q(name__last_name__icontains=search_query))    #.order_by('-name__last_name')
+    print(employees)
+    count_employees = len(employees)
+    context = {'employees': employees,
+               'search_query': search_query,
+               'count_employees': count_employees}
+    return render(request, 'company/list_employee_all.html', context)
 
 
 @login_required
