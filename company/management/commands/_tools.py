@@ -1,13 +1,13 @@
 import decimal
 import os
-import string
-
-import django
 import random
+import string
 from datetime import datetime
 
+import django
 from faker import Faker
 from transliterate import translit
+
 from company.management.decorators.clockdeco import clock
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
