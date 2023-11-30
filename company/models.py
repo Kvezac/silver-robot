@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
 from django.core.validators import MinValueValidator
-from django.db import models
+from django.db import models, transaction
 from mptt.models import MPTTModel, TreeForeignKey
 
 from user.models import Profile
@@ -80,3 +80,7 @@ class Employee(MPTTModel):
         """
         descendant = self.get_descendants(include_self=True)
         return descendant
+
+    def node_delete(self, *args, **kwargs):
+        with transaction.atomic():
+            super().delete(*args, **kwargs)

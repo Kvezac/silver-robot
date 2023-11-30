@@ -42,3 +42,5 @@ class Profile(models.Model):
         if self.last_name:
             return f'{self.last_name} {self.name[0].upper()}.{self.middle_name[0].upper()}.'
         return ''
+
+

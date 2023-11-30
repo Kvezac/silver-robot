@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Sum
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
+from mptt import utils
 from mptt.exceptions import InvalidMove
 
 from company.forms import AddEmployeeForm
@@ -109,24 +110,20 @@ def select_unassigned_users(request):
 
 @login_required
 def edit_employee(request, pk):
-    employee = get_object_or_404(Profile, id=pk)
+    employee = get_object_or_404(Employee, id=pk)
     title = f'Профиль: {employee}'
     context = {
         'title': title,
         'employee': employee,
     }
-
     if request.method == 'POST':
         form = AddEmployeeForm(request.POST, instance=employee)
         if form.is_valid():
             employee = form.save(commit=False)
-            if employee.get_parent == request.user.profile.employee_set.all().first():
-                employee.save()
-                return redirect('user:profile')
-            else:
-                return redirect('user:profile')
+            employee.save()
+            return redirect('user:profile', employee.id )
     else:
-        form = AddEmployeeForm(instance=request.user.profile.employee_set.all().first())
+        form = AddEmployeeForm(instance=employee)
     context['form'] = form
     return render(request, 'company/edit_employee.html', context)
 
@@ -172,11 +169,6 @@ def add_employee(request, pk):
 def delete_employee(request, pk):
     user = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
-        for child in user.get_children():
-            try:
-                child.parent = user.parent
-            except InvalidMove:
-                user.delete()
-        user.delete()
+        user.node_delete()
         return redirect('company:main-employee')
     return render(request, 'block/delete_employee.html', {'user': user})

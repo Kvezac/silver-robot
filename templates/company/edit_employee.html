@@ -21,11 +21,11 @@
                             </h3>
                         </div>
                     </div>
-                    <form class="row g-3 needs-validation" action="{% url 'company:edit-employee' user.id %}"
+                    <form class="row g-3 needs-validation" action="{% url 'company:edit-employee' employee.id %}"
                           method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {{ form.as_div }}
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-success btn-sm mr-auto shadow" type="submit">Сохранить изменения
                             </button>
